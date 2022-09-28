@@ -1,0 +1,78 @@
+# spring group
+spring.profiles.group:
+  "local": "common,local,h2-console"
+  "test": "common,local,h2-console"
+---
+# common
+spring:
+  config:
+    activate:
+      on-profile: common
+    import:
+      - classpath:application-oauth.yml
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    check-template-location: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+---
+# local
+spring:
+  config:
+    activate:
+      on-profile: local
+  thymeleaf:
+    cache: false
+server:
+  port : 8080
+  undertow:
+    threads:
+      io: 16
+      worker: 400
+logging:
+  config: classpath:log4j2-local.yml
+---
+
+# dev
+
+---
+# h2-console
+spring:
+  profiles:
+    active: h2-console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true
+        web-allow-others: false
+  datasource:
+    url: jdbc:log4jdbc:h2:file:~/Documents/h2db/study;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type: trace

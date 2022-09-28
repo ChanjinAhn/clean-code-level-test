@@ -256,4 +256,7 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
+
+application-oauth.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,intellij+all,jetbrains+all,java,gradle

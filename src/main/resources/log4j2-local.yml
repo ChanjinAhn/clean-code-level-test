@@ -1,0 +1,42 @@
+Configutation:
+  name: Default
+  status: warn
+
+  Properties:
+    Property:
+      -
+        name: log-path
+        value: "./logs"
+      -
+        name: pattern
+        value: "%highlight{[%-5level]} %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %C{1} - %msg%n"
+      -
+        name: charset-UTF-8
+        value: "UTF-8"
+
+  Appenders:
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        charset: ${charset-UTF-8}
+        pattern: ${pattern}
+        disableAnsi: false
+  Loggers:
+    Logger:
+      -
+        name: DemoSpringbootApplication
+        additivity: false
+        level: info
+        AppenderRef:
+          - ref: Console_Appender
+      -
+        name: io.oikk
+        additivity: false
+        level: DEBUG
+        AppenderRef:
+          - ref: Console_Appender
+    Root:
+      level: error
+      AppenderRef:
+        - ref: Console_Appender
