@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id "io.freefair.lombok" version "6.4.3.1"
+	id "com.github.node-gradle.node" version "3.4.0"
 	id 'java'
 }
 apply plugin: 'java'
@@ -84,3 +85,19 @@ tasks.withType(JavaCompile) {
 clean.doLast {
 	file(generated).deleteDir()
 }
+
+/**
+ * npm install start
+ */
+node {
+	version = '16.17.1'
+	npmVersion = '8.15.0'
+	download = true
+	nodeModulesDir = file("${projectDir}/src/main/resources/static")
+}
+task copyFrontLib(type: Copy) {
+	from "${projectDir}/src/main/resources/static"
+	into "${projectDir}/build/resources/main/static/."
+}
+copyFrontLib.dependsOn npmInstall
+compileJava.dependsOn copyFrontLib
