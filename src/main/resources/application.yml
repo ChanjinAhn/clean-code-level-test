@@ -8,8 +8,8 @@ spring:
   config:
     activate:
       on-profile: common
-    import:
-      - classpath:application-oauth.yml
+#    import:
+#      - classpath:application-oauth.yml
   devtools:
     livereload:
       enabled: true
