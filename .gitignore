@@ -19,6 +19,8 @@
 # Generated files
 .idea/**/contentModel.xml
 
+src/main/generated/**
+
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
@@ -263,3 +265,4 @@ application-oauth.yml
 
 ### npm
 src/main/resources/static/node_modules/*
+
