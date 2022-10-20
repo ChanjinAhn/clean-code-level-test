@@ -24,6 +24,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+#  liquibase:
+#    change-log: classpath:/db/changelog-master.xml
 ---
 # local
 spring:
@@ -76,3 +78,32 @@ logging:
       hibernate:
         SQL: debug
         type: trace
+---
+# local PostgreSQL
+spring:
+  profiles:
+    active: local-db-postgresql
+  # DB
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/clt
+    username: acj
+    password: javaBye#
+  # Connection Pool
+  hikari:
+    connection-timeout: 20000
+    maximum-pool-size: 10
+  #JPA
+  jpa:
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual: true

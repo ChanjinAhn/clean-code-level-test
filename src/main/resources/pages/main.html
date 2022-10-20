@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="../static/node_modules/tui-grid/dist/tui-grid.css">
+  <script src="../static/node_modules/tui-grid/dist/tui-grid.js"></script>
+
   <title>Title</title>
 </head>
 <body>
@@ -28,7 +32,42 @@
       </div>
       <button type="button" disabled>다음 ></button>
     </article>
-
+<div id="grid"></div>
   </main>
 </body>
 </html>
+
+<script>
+ const Grid = tui.grid
+
+ const instance = new Grid({
+   el: document.getElementById('grid'), // Container element
+   columns: [
+     {
+       header: 'Name',
+       name: 'name'
+     },
+     {
+       header: 'Artist',
+       name: 'artist'
+     },
+     {
+       header: 'Release',
+       name: 'release'
+     },
+     {
+       header: 'Genre',
+       name: 'genre'
+     }
+   ],
+   data: [
+     {
+       name: 'Beautiful Lies',
+       artist: 'Birdy',
+       release: '2016.03.26',
+       genre: 'Pop'
+     }
+   ]
+ });
+
+</script>
