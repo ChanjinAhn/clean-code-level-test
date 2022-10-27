@@ -1,6 +1,6 @@
 # spring group
 spring.profiles.group:
-  "local": "common,local,h2-console"
+  "local": "common,local,local-db-postgresql"
   "test": "common,local,h2-console"
 ---
 # common
@@ -10,11 +10,6 @@ spring:
       on-profile: common
 #    import:
 #      - classpath:application-oauth.yml
-  devtools:
-    livereload:
-      enabled: true
-    restart:
-      enabled: true
   thymeleaf:
     prefix: classpath:templates/
     suffix: .html
@@ -24,8 +19,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
-#  liquibase:
-#    change-log: classpath:/db/changelog-master.xml
+  # liquibase
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-root.yml
+    enabled: true
 ---
 # local
 spring:
@@ -34,6 +31,11 @@ spring:
       on-profile: local
   thymeleaf:
     cache: false
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
 server:
   port : 8080
   undertow:
@@ -95,16 +97,18 @@ spring:
     maximum-pool-size: 10
   #JPA
   jpa:
-    database: POSTGRESQL
-    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
-    show-sql: false
-    generate-ddl: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: false
     hibernate:
-      ddl-auto: validate
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        jdbc:
-          lob:
-            non_contextual: true
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        jdbc:
+#          lob:
+#            non_contextual: true
