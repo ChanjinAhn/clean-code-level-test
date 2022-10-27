@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "tailwindcss": "^3.2.1",
     "tui-grid": "^4.21.5"
   }
 }
