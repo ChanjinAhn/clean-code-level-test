@@ -1,4 +1,4 @@
-package io.oikk.system.config.exception;
+package io.olkkani.system.config.exception;
 
 import java.time.LocalDateTime;
 import lombok.Builder;

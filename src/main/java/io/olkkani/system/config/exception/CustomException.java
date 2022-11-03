@@ -1,4 +1,4 @@
-package io.oikk.system.config.exception;
+package io.olkkani.system.config.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,4 @@
-package io.oikk.system.config.exception;
-
-import static io.oikk.system.config.exception.ErrorCode.DUPLICATE_RESOURCE;
+package io.olkkani.system.config.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
@@ -16,8 +14,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = { ConstraintViolationException.class, DataIntegrityViolationException.class})
     protected ResponseEntity<ErrorResponse> handleDataException() {
-        log.error("handleDataException throw Exception : {}", DUPLICATE_RESOURCE);
-        return ErrorResponse.toResponseEntity(DUPLICATE_RESOURCE);
+        log.error("handleDataException throw Exception : {}", ErrorCode.DUPLICATE_RESOURCE);
+        return ErrorResponse.toResponseEntity(ErrorCode.DUPLICATE_RESOURCE);
     }
 
     @ExceptionHandler(value = { CustomException.class })
