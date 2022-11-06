@@ -1,4 +1,4 @@
-package io.oikk.system.config.querydsl;
+package io.olkkani.system.config.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.persistence.EntityManager;

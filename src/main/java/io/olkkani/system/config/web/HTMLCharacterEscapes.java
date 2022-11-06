@@ -1,4 +1,4 @@
-package io.oikk.system.config.web;
+package io.olkkani.system.config.web;
 
 import com.fasterxml.jackson.core.SerializableString;
 import com.fasterxml.jackson.core.io.CharacterEscapes;
@@ -34,10 +34,8 @@ public class HTMLCharacterEscapes extends CharacterEscapes {
         SerializedString serializedString;
         char charAt = (char) ch;
         if (Character.isHighSurrogate(charAt) || Character.isLowSurrogate(charAt)) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("\\u");
-            sb.append(String.format("%04x", ch));
-            serializedString = new SerializedString(sb.toString());
+            String sb = "\\u" + String.format("%04x", ch);
+            serializedString = new SerializedString(sb);
         } else {
             serializedString = new SerializedString(StringEscapeUtils.escapeHtml4(Character.toString(charAt)));
         }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}" lang="kr">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.min.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/page/home.css}" >-->
+</th:block>
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+  <script th:src="@{/node_modules/tui-grid/dist/tui-grid.min.js}"></script>
+  <script type="text/javascript" th:src="@{/js/test.js}"></script>
+
+</th:block>
+
+<!-- Content -->
+<div layout:fragment="content">
+  <form>
+    <label>질문<input type="text" name="question" id="question"></label>
+    <label>선택지 A</label>
+    <input type="file">
+    <label class="b">선택지 B</label>
+    <input type="file">
+    <div th:class="bg-red"></div>
+
+    <label th:class="section"><input type="radio" name="answer" th:value="A" checked>A</label>
+    <label><input type="radio" name="answer" th:value="B" >B</label>
+
+    <label>답 해설</label>
+    <input type="text" name="answerComment">
+  </form>
+</div>
+</html>
