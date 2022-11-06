@@ -1,4 +1,4 @@
-package io.oikk.system.config.web;
+package io.olkkani.system.config.web;
 
 import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

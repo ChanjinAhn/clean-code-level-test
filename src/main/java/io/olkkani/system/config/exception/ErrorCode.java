@@ -1,4 +1,4 @@
-package io.oikk.system.config.exception;
+package io.olkkani.system.config.exception;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;

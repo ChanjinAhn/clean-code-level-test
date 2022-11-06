@@ -1,4 +1,4 @@
-package io.oikk.system.config.web;
+package io.olkkani.system.config.web;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

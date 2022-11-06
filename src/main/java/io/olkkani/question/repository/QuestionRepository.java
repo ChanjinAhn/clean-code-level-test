@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
-    List<Question> find(Pageable pageable);
+//    List<Question> findByQuestion(String question, Pageable pageable);
 
 }

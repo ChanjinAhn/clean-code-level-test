@@ -1,4 +1,4 @@
-package io.oikk.system.config.auth;
+package io.olkkani.system.config.auth;
 
 import org.springframework.context.annotation.Configuration;
 

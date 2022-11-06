@@ -16,7 +16,7 @@ public class QuestionQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<Question> findRandomQuestions () {
-        return  queryFactory.selectFrom(question1)
+        return queryFactory.selectFrom(question1)
             .orderBy(NumberExpression.random().asc())
             .limit(10).fetch();
     }

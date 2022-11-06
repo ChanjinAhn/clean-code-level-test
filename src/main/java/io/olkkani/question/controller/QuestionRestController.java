@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class QuestionRestController {
 
-    private final QuestionService service;
+//    private final QuestionService service;
 
-    @GetMapping ("/questions")
+    @GetMapping ("questions")
     public List<QuestionRequest> find (Pageable pageable) {
-        return service.find(pageable);
+//        return service.find(pageable);
+        return null;
     }
 
 }
