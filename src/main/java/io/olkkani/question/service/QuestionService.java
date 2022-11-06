@@ -7,13 +7,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface QuestionService {
 
-    public void save (Question question);
-
-    public QuestionRequest deleteById (Long id);
-
+    public void save (QuestionRequest request);
     public List<QuestionRequest> findAll ();
-    public List<QuestionRequest> find(Pageable pageable);
+
     public QuestionRequest findById (Long id);
 
+    public List<QuestionRequest> findRandomQuestions ();
 
+    public void deleteById (Long id);
+//    public List<QuestionRequest> find(Pageable pageable);
 }
