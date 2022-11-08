@@ -18,10 +18,11 @@ configurations {
 	all{
 		// spring boot 기본 logger 제외
 		exclude module: 'spring-boot-starter-logging'
+		// test lib 제외
+		exclude module: 'org.hamcrest'
 		// was tomcat 제외
 		exclude module: 'spring-boot-starter-tomcat'
 		exclude module: 'undertow-websockets-jsr'
-		exclude module: 'org.hamcrest'
 	}
 }
 
