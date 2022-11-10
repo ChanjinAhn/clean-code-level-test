@@ -1,23 +1,33 @@
 package io.olkkani.common.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Slf4j
 public class ImageFile {
+//    @Value("${image.filePath}")
+    private final String savedImageFilePath = "/Users/acj/Documents/images";
+    private String hashedFileName;
 
-    String filePath = Paths.get("question_images").toString();
 
-    public String fileNameToHash (String fileName) {
+    private String fileNameToHash (String fileName) {
         try {
             // 난수 생성
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
@@ -35,35 +45,54 @@ public class ImageFile {
         }
         return fileName;
     }
-
-    public File getFileByFileName (String fileName) {
-        return Paths.get(filePath,fileName).toFile();
+    private boolean isDuplicateFileName (String fileName) {
+        File file = new File(fileName);
+        return !file.exists();
     }
-
-    public void saveImageFile (String fileName, File imageFile) {
-//        try {
-//            BufferedImage image =
-//        }catch (IOException e){
-//            log.error("",e);
-//        }
+    private void saveImageFile (String fileName, MultipartFile imageFile) {
+        try {
+            imageFile.transferTo(new File(fileName));
+        }catch (IOException e){
+            log.error("",e);
+        }
     }
 
 
     public String saveFileAndReturnHashedFileName (MultipartFile imageFile) {
         String originalFileName = imageFile.getOriginalFilename();
-        String hashedImageFIleName = fileNameToHash(FilenameUtils.getBaseName(originalFileName));
         String extension = FilenameUtils.getExtension(originalFileName);
+        String fileFullName;
 
-//        imageFile.
-//        saveImageFile(im);
+        do {
+            hashedFileName = fileNameToHash(FilenameUtils.getBaseName(originalFileName));
+            fileFullName = Paths.get(savedImageFilePath, hashedFileName + "." + extension).toString();
+        } while (isDuplicateFileName(fileFullName));
 
-        return hashedImageFIleName + "." + extension;
+        saveImageFile(fileFullName, imageFile);
+        return hashedFileName + "." + extension;
     }
 
     public MultipartFile getMultipartFileByFileName (String fileName){
-
-        return null;
+        File file = Paths.get(savedImageFilePath, fileName).toFile();
+        FileItem fileItem = null;
+        try {
+            fileItem = new DiskFileItem(fileName, Files.probeContentType(file.toPath()), false, file.getName(), (int) file.length(), file.getParentFile());
+            InputStream input = new FileInputStream(file);
+            OutputStream os = fileItem.getOutputStream();
+            IOUtils.copy(input, os);
+            // Or faster..
+            // IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
+        } catch (IOException ex) {
+            log.error("", ex);
+        }
+        return new CommonsMultipartFile(fileItem);
     }
 
-
+    public void deleteImageFile (String fileName)  {
+        try {
+            Files.deleteIfExists(Paths.get(savedImageFilePath, fileName).toAbsolutePath());
+        } catch (IOException e) {
+            log.error("file has already been deleted", e);
+        }
+    }
 }
