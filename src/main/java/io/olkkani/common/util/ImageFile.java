@@ -3,8 +3,6 @@ package io.olkkani.common.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -22,9 +21,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Slf4j
 public class ImageFile {
+    // todo 고정 경로를 환경에 맞춰서 변경될 수 있도록 수정
 //    @Value("${image.filePath}")
     private final String savedImageFilePath = "/Users/acj/Documents/images";
-    private String hashedFileName;
 
 
     private String fileNameToHash (String fileName) {
@@ -63,6 +62,7 @@ public class ImageFile {
         String extension = FilenameUtils.getExtension(originalFileName);
         String fileFullName;
 
+        String hashedFileName;
         do {
             hashedFileName = fileNameToHash(FilenameUtils.getBaseName(originalFileName));
             fileFullName = Paths.get(savedImageFilePath, hashedFileName + "." + extension).toString();
@@ -77,15 +77,11 @@ public class ImageFile {
         FileItem fileItem = null;
         try {
             fileItem = new DiskFileItem(fileName, Files.probeContentType(file.toPath()), false, file.getName(), (int) file.length(), file.getParentFile());
-            InputStream input = new FileInputStream(file);
-            OutputStream os = fileItem.getOutputStream();
-            IOUtils.copy(input, os);
-            // Or faster..
-            // IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
+            IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
         } catch (IOException ex) {
             log.error("", ex);
         }
-        return new CommonsMultipartFile(fileItem);
+        return new CommonsMultipartFile(Objects.requireNonNull(fileItem));
     }
 
     public void deleteImageFile (String fileName)  {
