@@ -1,7 +1,8 @@
 # spring group
 spring.profiles.group:
-  "local": "common,local,local-db-postgresql"
+  "local": "common,local,local-db-postgresql,local-mac-acj"
   "test": "common,local,h2-console"
+  "service": "common,service"
 ---
 # common
 spring:
@@ -10,6 +11,8 @@ spring:
       on-profile: common
 #    import:
 #      - classpath:application-oauth.yml
+  resources:
+    static-locations: classpath:static/
   thymeleaf:
     prefix: classpath:templates/
     suffix: .html
@@ -31,8 +34,8 @@ spring:
       on-profile: local
 #  resources:
 #    static-locations: classpath:static/
-  mvc:
-    static-path-pattern: /static/**
+#  mvc:
+#    static-path-pattern: /static/**
   thymeleaf:
     cache: false
     check-template-location: true
@@ -51,11 +54,20 @@ logging:
   config: classpath:log4j2-local.yml
 ---
 # mac local
+spring:
+  profiles:
+    active: local-mac-acj
 image:
-  filepath: /Users/acj/Documents
+  filepath: /Users/acj/Documents/images
 
 # dev
-
+---
+# service
+spring:
+  profiles:
+    active: service
+  thymeleaf:
+    cache: true
 ---
 # h2-console
 spring:
