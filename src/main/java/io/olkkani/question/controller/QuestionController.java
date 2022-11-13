@@ -5,11 +5,12 @@ import io.olkkani.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//@RequestMapping("/question")
+@RequestMapping("question")
 @RequiredArgsConstructor
 @Slf4j
 @Controller
@@ -24,13 +25,13 @@ public class QuestionController {
 
     @GetMapping("register")
     public String register () {
-        // todo list Page 생성 후 PostMapping 으로 변경
-        return "pages/question/question_register";
-    }
+        return "pages/question/question_register";}
 
     @PostMapping("update")
-    public String update (){
-        return "pages/question/register";
+    public String update (long id, Model model){
+        QuestionRequest response = service.findById(id);
+        model.addAttribute("response", response);
+        return "pages/question/question_register";
     }
 
     @PostMapping("save")
