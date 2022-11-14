@@ -11,6 +11,10 @@ spring:
       on-profile: common
 #    import:
 #      - classpath:application-oauth.yml
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
   resources:
     static-locations: classpath:static/
   thymeleaf:
