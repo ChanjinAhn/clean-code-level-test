@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional(rollbackFor = Exception.class)
 @Service
 public class QuestionServiceImpl implements QuestionService{
 
@@ -25,6 +24,12 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     public void save(QuestionRequest request) {
         ImageFile imageFile = new ImageFile();
+        // todo 기존에 저장된 이미지 파일을 삭제, 추후 파일을 수정하지 않은 경우에는 삭제하지 않도록 변경(서버 부하량에 따라 결정)
+        if (request.getId() != 0){
+            Question selectedQuestion = repository.findById(request.getId()).orElseThrow(IllegalArgumentException::new);
+            imageFile.deleteImageFile(selectedQuestion.getOptionA());
+            imageFile.deleteImageFile(selectedQuestion.getOptionB());
+        }
         request.setOptionA(imageFile.saveFileAndReturnHashedFileName(request.getOptionAFile()));
         request.setOptionB(imageFile.saveFileAndReturnHashedFileName(request.getOptionBFile()));
         Question question = modelMapper.map(request, Question.class);
@@ -42,15 +47,6 @@ public class QuestionServiceImpl implements QuestionService{
         modelMapper.map(queryRepository.findRandomQuestions(), response);
         return response;
     }
-
-//    @Override
-//    public List<QuestionRequest> find(Pageable pageable) {
-//        List<Question> questionResult = repository.find(pageable);
-//        List<QuestionRequest> question = new ArrayList<>();
-//        modelMapper.map(questionResult, question);
-//        return question;
-//        return null;
-//    }
 
     @Override
     public QuestionRequest findById(Long id) {
