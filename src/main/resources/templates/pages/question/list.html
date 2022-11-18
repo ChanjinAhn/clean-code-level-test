@@ -8,13 +8,12 @@
 
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-  <!--  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">-->
+  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">
 </th:block>
 <!-- index.html 고유 스크립트 추가 -->
 <th:block layout:fragment="script">
-  <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-  <!--  <script th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>-->
+  <script th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>
+  <script type="text/javascript" th:src="@{/js/questions/list.js}"></script>
 </th:block>
 
 <!-- Content -->
@@ -65,6 +64,6 @@
   const registerButton = document.getElementById("register_button")
   registerButton.addEventListener('click', function () {
     console.log("ddd")
-    window.location.href = "/question/register"
+    location.href = "/question/register"
   })
 </script>

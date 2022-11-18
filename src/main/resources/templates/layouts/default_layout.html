@@ -2,20 +2,16 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
   <meta charset="UTF-8"/>
-  <title>thymeleaf layout</title>
+
   <!-- content css -->
-<!--  <link rel="stylesheet" th:href="@{/node_modules/tailwindcss/tailwind.css}">-->
+  <link rel="stylesheet" th:href="@{/node_modules/tailwindcss/tailwind.css}">
   <th:block layout:fragment="css"></th:block>
+
   <!-- content script -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script
-      src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
-      integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
-      crossorigin="anonymous"></script>
-    <th:block layout:fragment="script"></th:block>
-</head>
+  <script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.slim.js}"></script>
+  <th:block layout:fragment="script"></th:block>
+
 <body>
 <!-- header fragment 사용 -->
 <th:block th:replace="fragments/common_header :: common_header"></th:block>
