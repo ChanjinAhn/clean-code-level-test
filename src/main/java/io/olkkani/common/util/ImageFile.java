@@ -10,7 +10,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -79,9 +78,10 @@ public class ImageFile {
             fileItem = new DiskFileItem(fileName, Files.probeContentType(file.toPath()), false, file.getName(), (int) file.length(), file.getParentFile());
             IOUtils.copy(new FileInputStream(file), fileItem.getOutputStream());
         } catch (IOException ex) {
-            log.error("", ex);
+            log.error("file not found", ex);
         }
-        return new CommonsMultipartFile(Objects.requireNonNull(fileItem));
+        assert fileItem != null;
+        return new CommonsMultipartFile(fileItem);
     }
 
     public void deleteImageFile (String fileName)  {
