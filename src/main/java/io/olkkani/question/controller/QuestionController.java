@@ -25,13 +25,13 @@ public class QuestionController {
 
     @GetMapping("register")
     public String register () {
-        return "pages/question/question_register";}
+        return "pages/question/register";}
 
     @PostMapping("update")
     public String update (long id, Model model){
         QuestionRequest response = service.findById(id);
         model.addAttribute("response", response);
-        return "pages/question/question_register";
+        return "pages/question/register";
     }
 
     @PostMapping("save")
