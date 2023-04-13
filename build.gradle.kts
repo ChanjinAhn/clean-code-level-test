@@ -33,7 +33,7 @@ dependencies {
 	implementation("commons-io:commons-io:2.11.0")
 	implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
 	// spring
-	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	// was
