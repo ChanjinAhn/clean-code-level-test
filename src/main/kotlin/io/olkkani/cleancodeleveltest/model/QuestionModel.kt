@@ -4,9 +4,8 @@ import io.olkkani.cleancodeleveltest.domain.AnswerOption
 import io.olkkani.cleancodeleveltest.domain.Question
 import io.olkkani.cleancodeleveltest.model.QuestionResponse
 
-
+// request model 을 제대로 불러오지 못하는 이유 찾기
 data class QuestionRequest(
-    val id : Long? = null,
     val question: String,
     val optionA: String,
     val optionB: String,
