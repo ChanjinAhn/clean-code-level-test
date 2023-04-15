@@ -2,7 +2,6 @@ package io.olkkani.cleancodeleveltest.model
 
 import io.olkkani.cleancodeleveltest.domain.AnswerOption
 import io.olkkani.cleancodeleveltest.domain.Question
-import io.olkkani.cleancodeleveltest.model.QuestionResponse
 
 // request model 을 제대로 불러오지 못하는 이유 찾기
 data class QuestionRequest(
@@ -22,6 +21,7 @@ data class QuestionResponse(
     val answer: AnswerOption,
     val description: String,
 )
+
 
 fun Question.toResponse() = QuestionResponse (
     id = id!!,
