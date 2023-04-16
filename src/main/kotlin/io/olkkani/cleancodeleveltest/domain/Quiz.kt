@@ -4,7 +4,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table
-class Question(
+class Quiz(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
