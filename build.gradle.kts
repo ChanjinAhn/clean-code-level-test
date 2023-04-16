@@ -39,7 +39,7 @@ dependencies {
 	// was
 	implementation("org.springframework.boot:spring-boot-starter-undertow")
 	// database, jdbc
-
+	runtimeOnly("com.h2database:h2:2.1.214")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	// view template
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
