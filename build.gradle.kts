@@ -1,13 +1,14 @@
+import org.jetbrains.kotlin.gradle.targets.js.npm.fromSrcPackageJson
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	id("org.springframework.boot") version "3.0.5"
 	id("io.spring.dependency-management") version "1.1.0"
 
-	kotlin("jvm") version "1.7.10"
-	kotlin("plugin.spring") version "1.7.10"
-	kotlin("plugin.jpa") version  "1.7.10"
-	kotlin("kapt") version "1.7.10"
+	id("org.jetbrains.kotlin.jvm") version "1.7.10"
+	id("org.jetbrains.kotlin.plugin.spring") version "1.7.10"
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.7.10"
+	id("org.jetbrains.kotlin.kapt") version "1.7.10"
 
 }
 
@@ -26,7 +27,7 @@ configurations {
 }
 dependencies {
 	// kotlin
-	implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
+//	implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10")
 	// common
 	implementation("org.apache.commons:commons-text:1.10.0")
@@ -42,8 +43,20 @@ dependencies {
 	// database, jdbc
 	runtimeOnly("com.h2database:h2:2.1.214")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("com.querydsl:querydsl-jpa:5.0.0")
+
+	compileOnly("com.querydsl:querydsl-core:5.0.0")
+	compileOnly("com.querydsl:querydsl-jpa:5.0.0")
+//	annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
+//	annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jpa")
+//	implementation("com.querydsl:querydsl-jpa:5.0.0")
+//	implementation("com.querydsl:querydsl-apt:5.0.0")
 	implementation("javax.persistence:javax.persistence-api:2.2")
+
+	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
+
+	annotationProcessor("jakarta.persistence:jakarta.persistence-api:3.1.0")
+	annotationProcessor("jakarta.persistence:jakarta.annotation-api:3.1.0")
+	annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
 
 	// view template
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -53,7 +66,6 @@ dependencies {
 	testImplementation("com.ninja-squad:springmockk:4.0.0")
 
 	kapt("org.springframework.boot:spring-boot-configuration-processor")
-	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 }
 
 tasks.withType<KotlinCompile> {
@@ -70,3 +82,14 @@ tasks.withType<Test> {
 tasks.getByName<Jar>("jar") {
 	enabled = false
 }
+
+// Kotlin QClass Setting
+kotlin.sourceSets.main {
+	println("kotlin sourceSets builDir:: $buildDir")
+	setBuildDir("$buildDir")
+}
+
+// legacy Kotlin QClass Setting (deprecated gradle version 7.x)
+//sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class){
+//	kotlin.srcDir("$buildDir/generated/source/kapt/main")
+//}
