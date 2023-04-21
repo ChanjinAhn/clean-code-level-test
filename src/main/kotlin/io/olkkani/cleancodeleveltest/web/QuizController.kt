@@ -31,7 +31,7 @@ class QuizController(
     ) = quizService.get(id).toResponse()
 
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     fun edit (
         @PathVariable id: Long,
         @RequestBody request: QuizRequest
@@ -50,7 +50,7 @@ class QuizController(
     }
 
 
-    @GetMapping
-    fun getRandomList() = quizService.getRandomList()
+//    @GetMapping
+//    fun getRandomList() = quizService.getRandomList()
 
 }

@@ -2,14 +2,15 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.fromSrcPackageJson
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "3.0.5"
+	id("org.springframework.boot") version "2.7.5"
 	id("io.spring.dependency-management") version "1.1.0"
 
-	id("org.jetbrains.kotlin.jvm") version "1.7.10"
-	id("org.jetbrains.kotlin.plugin.spring") version "1.7.10"
-	id("org.jetbrains.kotlin.plugin.jpa") version "1.7.10"
-	id("org.jetbrains.kotlin.kapt") version "1.7.10"
+	id("org.jetbrains.kotlin.jvm") version "1.6.10"
+	id("org.jetbrains.kotlin.plugin.spring") version "1.6.10"
+	id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
+	id("org.jetbrains.kotlin.kapt") version "1.6.10"
 
+	idea
 }
 
 group = "io.olkkani"
@@ -23,12 +24,15 @@ configurations {
 	all {
 		// was tomcat 제외
 		exclude(module = "spring-boot-starter-tomcat")
+		// not necessary test lib delete
+		exclude(module = "org.hamcrest")
 	}
 }
 dependencies {
 	// kotlin
-//	implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	// common
 	implementation("org.apache.commons:commons-text:1.10.0")
 	implementation("org.apache.commons:commons-lang3:3.12.0")
@@ -44,12 +48,10 @@ dependencies {
 	runtimeOnly("com.h2database:h2:2.1.214")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-	compileOnly("com.querydsl:querydsl-core:5.0.0")
-	compileOnly("com.querydsl:querydsl-jpa:5.0.0")
 //	annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
 //	annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jpa")
-//	implementation("com.querydsl:querydsl-jpa:5.0.0")
-//	implementation("com.querydsl:querydsl-apt:5.0.0")
+	implementation("com.querydsl:querydsl-jpa:5.0.0")
+	implementation("com.querydsl:querydsl-apt:5.0.0")
 	implementation("javax.persistence:javax.persistence-api:2.2")
 
 	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
@@ -93,3 +95,13 @@ kotlin.sourceSets.main {
 //sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class){
 //	kotlin.srcDir("$buildDir/generated/source/kapt/main")
 //}
+
+// querydsl 추가
+
+idea {
+	module {
+		val kaptMain = file("build/generated/source/kapt/main")
+		sourceDirs.add(kaptMain)
+		generatedSourceDirs.add(kaptMain)
+	}
+}

@@ -11,13 +11,14 @@ class Quiz(
     val id: Long? = null,
 
     @Column
-    val question: String,
+    var question: String,
     @Column
-    val optionA: String,
+    var optionA: String,
     @Column
-    val optionB: String,
+    var optionB: String,
     @Column
-    val answer: AnswerOption,
+    var answer: String,
     @Column
-    val description: String
-) : BaseEntity()
+    var description: String
+)
+//) : BaseEntity()

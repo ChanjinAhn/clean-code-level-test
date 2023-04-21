@@ -8,17 +8,19 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class QuizRepositorySupport(
-    val queryFactory: JPAQueryFactory
+    private val queryFactory: JPAQueryFactory
 ) : QuerydslRepositorySupport(
     Quiz::class.java
 //    val jpaQueryFactory: JPAQueryFactor
 ){
 
 
-    fun findRandomQuiz(): List<Quiz> {
-        return queryFactory.selectFrom(quiz)
-            .orderBy(NumberExpression.random().asc())
-            .limit(10).fetch()
+    fun getRandomQuiz(): List<Quiz>? {
+
+return null
+//        return queryFactory.selectFrom(quiz)
+//            .orderBy(NumberExpression.random().asc())
+//            .limit(10).fetch()
     }
 }
 //    val jpaQueryFactory: JPAQueryFactory

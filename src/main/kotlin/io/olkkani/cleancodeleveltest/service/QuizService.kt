@@ -3,6 +3,7 @@ package io.olkkani.cleancodeleveltest.service
 import io.olkkani.cleancodeleveltest.config.exception.NotFoundException
 import io.olkkani.cleancodeleveltest.domain.Quiz
 import io.olkkani.cleancodeleveltest.domain.QuizRepository
+import io.olkkani.cleancodeleveltest.domain.QuizRepositorySupport
 import io.olkkani.cleancodeleveltest.model.QuizRequest
 import io.olkkani.cleancodeleveltest.model.toResponse
 import org.springframework.data.repository.findByIdOrNull
@@ -11,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class QuizService (
-    private val questionRepository: QuizRepository
+    private val quizRepository: QuizRepository,
+//    private val quizRepositorySupport: QuizRepositorySupport
 ){
 
 
@@ -24,35 +26,33 @@ class QuizService (
             answer = request.answer,
             description = request.description
         )
-        questionRepository.save(question)
+        quizRepository.save(question)
 
     }
         @Transactional(readOnly = true)
     fun getAll() =
-            questionRepository.findAll().map { it.toResponse() }
+            quizRepository.findAll().map { it.toResponse() }
 
     @Transactional(readOnly = true)
     fun get(id: Long): Quiz {
-        return questionRepository.findByIdOrNull(id) ?: throw NotFoundException("질문이 존재하지 않습니다.")
+        return quizRepository.findByIdOrNull(id) ?: throw NotFoundException("질문이 존재하지 않습니다.")
     }
 
-    @Transactional
-    fun delete(id: Long) = questionRepository.deleteById(id)
-    fun getRandomList() {
-
-        return
-//        questionRepository.findAllRam
-    }
-
+    fun delete(id: Long) = quizRepository.deleteById(id)
+//    @Transactional(readOnly = true)
+//    fun getRandomList() = quizRepositorySupport.getRandomQuiz()?.map { it.toResponse() }
+//
+//
     fun edit(id: Long, request: QuizRequest) {
-        val quiz = questionRepository.findByIdOrNull(id) ?: throw NotFoundException("질문이 존재하지 않습니다.")
-//        (quiz){
-//            question = request.question,
-//            optionA = request.optionA,
-//            optionB = request.optionB,
-//            answer = request.answer,
-//            description = request.description
-//            questionRepository.save(this)
-//        }
-    }
+       quizRepository.findByIdOrNull(id)
+            ?.apply {
+                question = request.question
+                optionA = request.optionA
+                optionB = request.optionB
+                answer = request.answer
+                description = request.description
+
+                quizRepository.save(this)
+            } ?: throw NotFoundException("질문이 존재하지 않습니다.")
+         }
 }
