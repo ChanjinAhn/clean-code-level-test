@@ -12,17 +12,19 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.transaction.annotation.Transactional
 
 private val logger = KotlinLogging.logger {}
 
 @SpringBootTest
+@ActiveProfiles("test")
 @Transactional
-class QuizRepositoryTest (
+class QuizRepositoryTest(
     @Autowired private val quizRepository: QuizRepository,
     @Autowired private val quizRepositorySupport: QuizRepositorySupport
-){
+) {
 
     @DisplayName("Quiz 생성 테스트")
     @Test
@@ -63,15 +65,21 @@ class QuizRepositoryTest (
         )
         val savedQuiz = quizRepository.save(quiz)
 
-        // when
-//        val editedQuiz = with(savedQuiz) {
-//            question = "변경된 질문"
-//            quizRepository.save(this)
-//        }
+        //when
+        val editedQuiz =
+            quizRepository.save(
+                Quiz(
+                    question = "변경된 질문",
+                    answer = savedQuiz.answer,
+                    optionA = savedQuiz.optionA,
+                    optionB = savedQuiz.optionB,
+                    description = savedQuiz.description
+                )
+            )
 
-        // than
-//        assertThat(savedQuiz.id).isEqualTo(editedQuiz.id)
-//        assertThat(savedQuiz.question).isNotEqualTo(editedQuiz.question)
+//         than
+        assertThat(savedQuiz.id).isEqualTo(editedQuiz.id)
+        assertThat(savedQuiz.question).isNotEqualTo(editedQuiz.question)
     }
 
 
