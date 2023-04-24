@@ -11,23 +11,10 @@ class QuizRepositorySupport(
     private val queryFactory: JPAQueryFactory
 ) : QuerydslRepositorySupport(
     Quiz::class.java
-//    val jpaQueryFactory: JPAQueryFactor
 ){
 
-
-    fun getRandomQuiz(): List<Quiz>? {
-
-return null
-//        return queryFactory.selectFrom(quiz)
-//            .orderBy(NumberExpression.random().asc())
-//            .limit(10).fetch()
-    }
+    fun getRandomQuiz(): List<Quiz>? =
+        queryFactory.selectFrom(quiz)
+            .orderBy(NumberExpression.random().asc())
+            .limit(10).fetch()
 }
-//    val jpaQueryFactory: JPAQueryFactory
-//){
-//    fun findRandomQuiz(): List<Quiz> {
-//        return jpaQueryFactory.selectFrom(QQuiz.quiz1)
-//            .orderBy(NumberExpression.random().asc())
-//            .limit(10).fetch()
-//    }
-//}
