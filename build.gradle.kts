@@ -46,6 +46,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-undertow")
 	// database, jdbc
 	runtimeOnly("com.h2database:h2:2.1.214")
+	testRuntimeOnly("com.h2database:h2:2.1.214")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
 //	annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")

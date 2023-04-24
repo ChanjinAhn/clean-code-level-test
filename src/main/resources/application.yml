@@ -1,3 +1,12 @@
+spring.profiles.group:
+  "test": "common,local-db-h2"
+---
+# common
+spring:
+  config:
+    activate:
+      on-profile: common
+---
 spring:
   h2:
     console:
@@ -17,3 +26,23 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
+
+---
+# DB - H2
+spring:
+  profiles:
+    active: local-db-h2
+  jpa:
+    showSql: true
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: create
+        dialect: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:~/cclt
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
