@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.targets.js.npm.fromSrcPackageJson
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
