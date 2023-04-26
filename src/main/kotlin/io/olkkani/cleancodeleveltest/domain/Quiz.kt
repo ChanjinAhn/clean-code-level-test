@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table
-data class Quiz(
+class Quiz(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

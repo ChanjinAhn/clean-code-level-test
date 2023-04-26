@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class QuizService (
     private val quizRepository: QuizRepository,
-//    private val quizRepositorySupport: QuizRepositorySupport
+    private val quizRepositorySupport: QuizRepositorySupport
 ){
 
 
@@ -39,10 +39,10 @@ class QuizService (
     }
 
     fun delete(id: Long) = quizRepository.deleteById(id)
-//    @Transactional(readOnly = true)
-//    fun getRandomList() = quizRepositorySupport.getRandomQuiz()?.map { it.toResponse() }
-//
-//
+    @Transactional(readOnly = true)
+    fun getRandomList() = quizRepositorySupport.getRandomQuiz()?.map { it.toResponse() }
+
+    @Transactional
     fun edit(id: Long, request: QuizRequest) {
        quizRepository.findByIdOrNull(id)
             ?.apply {
