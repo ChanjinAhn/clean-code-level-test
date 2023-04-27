@@ -20,5 +20,4 @@ class Quiz(
     var answer: String,
     @Column
     var description: String
-)
-//) : BaseEntity()
+) : BaseEntity()

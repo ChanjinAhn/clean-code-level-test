@@ -1,8 +1,5 @@
-package io.olkkani.cleancodeleveltest.repository
+package io.olkkani.cleancodeleveltest.domain
 
-import io.olkkani.cleancodeleveltest.domain.Quiz
-import io.olkkani.cleancodeleveltest.domain.QuizRepository
-import io.olkkani.cleancodeleveltest.domain.QuizRepositorySupport
 import mu.KotlinLogging
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
