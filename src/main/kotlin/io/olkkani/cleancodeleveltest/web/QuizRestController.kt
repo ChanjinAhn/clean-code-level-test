@@ -14,6 +14,7 @@ class QuizRestController(
 ) {
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun create(
         @RequestBody request: QuizRequest
     ) {
@@ -32,6 +33,7 @@ class QuizRestController(
 
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     fun edit (
         @PathVariable id: Long,
         @RequestBody request: QuizRequest

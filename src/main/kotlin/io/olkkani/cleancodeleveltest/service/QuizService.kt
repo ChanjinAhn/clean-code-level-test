@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class QuizService (
+class QuizService(
     private val quizRepository: QuizRepository,
     private val quizRepositorySupport: QuizRepositorySupport
-){
+) {
 
 
     @Transactional
@@ -29,9 +29,13 @@ class QuizService (
         quizRepository.save(question)
 
     }
-        @Transactional(readOnly = true)
+
+    @Transactional(readOnly = true)
     fun getAll() =
-            quizRepository.findAll().map { it.toResponse() }
+        quizRepository.findAll().map { it.toResponse() }
+
+    @Transactional(readOnly = true)
+    fun getList(): MutableList<Quiz> = quizRepository.findAll()
 
     @Transactional(readOnly = true)
     fun get(id: Long): Quiz {
@@ -39,12 +43,13 @@ class QuizService (
     }
 
     fun delete(id: Long) = quizRepository.deleteById(id)
+
     @Transactional(readOnly = true)
-    fun getRandomList() = quizRepositorySupport.getRandomQuiz()?.map { it.toResponse() }
+    fun getRandomList(): List<Quiz>? = quizRepositorySupport.getRandomQuiz()
 
     @Transactional
     fun edit(id: Long, request: QuizRequest) {
-       quizRepository.findByIdOrNull(id)
+        quizRepository.findByIdOrNull(id)
             ?.apply {
                 question = request.question
                 optionA = request.optionA
@@ -54,5 +59,5 @@ class QuizService (
 
                 quizRepository.save(this)
             } ?: throw NotFoundException("질문이 존재하지 않습니다.")
-         }
+    }
 }
