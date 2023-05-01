@@ -27,6 +27,11 @@ configurations {
 		exclude(module = "org.hamcrest")
 	}
 }
+allOpen {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
+}
 dependencies {
 	// kotlin
 	implementation("org.jetbrains.kotlin:kotlin-reflect")

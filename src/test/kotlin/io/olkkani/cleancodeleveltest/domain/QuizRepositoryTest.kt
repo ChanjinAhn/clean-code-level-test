@@ -25,7 +25,7 @@ class QuizRepositoryTest(
         // given
         val quiz = Quiz(
             question = "test question",
-            answer = "123",
+            answer = AnswerOption.A,
             optionA = "test optionA",
             optionB = "test optionB",
             description = "test description"
@@ -47,7 +47,7 @@ class QuizRepositoryTest(
             quizRepository.save(
                 Quiz(
                     question = "질문 $i",
-                    answer = "123",
+                    answer = AnswerOption.A,
                     optionA = "test optionA",
                     optionB = "test optionB",
                     description = "test description"
@@ -73,7 +73,7 @@ class QuizRepositoryTest(
         // given
         val quiz = Quiz(
             question = "최초 질문",
-            answer = "123",
+            answer = AnswerOption.A,
             optionA = "test optionA",
             optionB = "test optionB",
             description = "test description"

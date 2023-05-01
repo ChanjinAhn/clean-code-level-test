@@ -1,0 +1,35 @@
+# QuizRestController
+
+### Create Quiz
+POST http://localhost:8080/quiz/
+Content-Type: application/json
+
+{
+"question": "질문",
+"optionA": "선택지 A",
+"optionB": "선택지 B",
+"answer": "B",
+"description": "설명"
+}
+
+### Get Quiz
+GET http://localhost:8080/quiz/1
+
+### Edit Quiz
+PUT http://localhost:8080/quiz/1
+Content-Type: application/json
+
+{
+  "question": "변경 된 질문",
+  "optionA": "변경된 선택지 A",
+  "optionB": "선택지 B",
+  "answer": "A",
+  "description": "설명"
+}
+
+### Get edited Quiz
+GET http://localhost:8080/quiz/1
+
+
+### Get Quiz NotFound
+GET http://localhost:8080/quiz/2

@@ -8,27 +8,28 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 class QuizController (
     private val quizService: QuizService
 ){
-    @GetMapping
-    fun list (
-        model: Model
-    ): String {
-        val quizzes = quizService.getList().map { it.toResponse()}
-        model.addAttribute("quizzes", quizzes)
-        return "list"
-    }
+//    @GetMapping
+//    fun list (
+//        model: Model
+//    ): String {
+//        val quizzes = quizService.getList().map { it.toResponse()}
+//        model.addAttribute("quizzes", quizzes)
+//        return "list"
+//    }
 
-    @GetMapping
+    @GetMapping("/register")
     fun register (
 
     ) = "register"
 
-    @GetMapping
+    @PostMapping("/editor")
     fun editor (
        id: Long,
        model: Model
@@ -38,7 +39,7 @@ class QuizController (
         return "editor"
     }
 
-    @GetMapping
+    @GetMapping("/level-test")
     fun quiz (
         model : Model
     ) : String{
@@ -47,6 +48,6 @@ class QuizController (
         return "quiz"
     }
 
-    @PostMapping
+    @PostMapping("/result")
     fun result () = "result"
 }

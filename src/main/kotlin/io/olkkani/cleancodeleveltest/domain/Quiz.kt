@@ -6,9 +6,6 @@ import javax.persistence.*
 @Entity
 @Table
 class Quiz(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
 
     @Column
     var question: String,
@@ -17,7 +14,15 @@ class Quiz(
     @Column
     var optionB: String,
     @Column
-    var answer: String,
+    var answer: AnswerOption,
     @Column
-    var description: String
+    var description: String,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null,
 ) : BaseEntity()
+
+
+enum class AnswerOption {
+    A,B
+}

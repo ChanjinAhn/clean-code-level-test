@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
-@Controller
+@RestController
 @RequestMapping("/quiz/")
 class QuizRestController(
     private val quizService: QuizService
@@ -29,7 +29,7 @@ class QuizRestController(
     @GetMapping("/{id}")
     fun get(
         @PathVariable id: Long
-    ) = quizService.get(id).toResponse()
+    ) = quizService.get(id)
 
 
     @PutMapping("/{id}")

@@ -34,14 +34,17 @@ class QuizService(
     fun getAll() =
         quizRepository.findAll().map { it.toResponse() }
 
-    @Transactional(readOnly = true)
-    fun getList(): MutableList<Quiz> = quizRepository.findAll()
+//    @Transactional(readOnly = true)
+//    fun getList(): MutableList<Quiz> {
+//        return quizRepository.findAll()
+//    }
 
     @Transactional(readOnly = true)
     fun get(id: Long): Quiz {
         return quizRepository.findByIdOrNull(id) ?: throw NotFoundException("질문이 존재하지 않습니다.")
     }
 
+    @Transactional
     fun delete(id: Long) = quizRepository.deleteById(id)
 
     @Transactional(readOnly = true)
@@ -49,15 +52,22 @@ class QuizService(
 
     @Transactional
     fun edit(id: Long, request: QuizRequest) {
-        quizRepository.findByIdOrNull(id)
-            ?.apply {
+//        val quiz = quizRepository.findByIdOrNull(id)?: throw NotFoundException("질문이 존재하지 않습니다.")
+//
+//        quiz.apply {
+//            question = request.question
+//            optionA = request.optionA
+//            optionB = request.optionB
+//            answer = request.answer
+//            description = request.description
+//        }
+//
+        quizRepository.findByIdOrNull(id)?.run{
                 question = request.question
                 optionA = request.optionA
                 optionB = request.optionB
                 answer = request.answer
                 description = request.description
-
-                quizRepository.save(this)
             } ?: throw NotFoundException("질문이 존재하지 않습니다.")
     }
 }
