@@ -29,7 +29,7 @@ class QuizRestController(
     @GetMapping("/{id}")
     fun get(
         @PathVariable id: Long
-    ) = quizService.get(id)
+    ) = quizService.get(id).toResponse()
 
 
     @PutMapping("/{id}")
