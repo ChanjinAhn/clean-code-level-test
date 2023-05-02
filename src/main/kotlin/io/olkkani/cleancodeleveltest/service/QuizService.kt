@@ -32,7 +32,7 @@ class QuizService(
 
     @Transactional(readOnly = true)
     fun getAll() =
-        quizRepository.findAll().map { it.toResponse() }
+        quizRepository.findAll()
 
 //    @Transactional(readOnly = true)
 //    fun getList(): MutableList<Quiz> {
@@ -52,17 +52,7 @@ class QuizService(
 
     @Transactional
     fun edit(id: Long, request: QuizRequest) {
-//        val quiz = quizRepository.findByIdOrNull(id)?: throw NotFoundException("질문이 존재하지 않습니다.")
-//
-//        quiz.apply {
-//            question = request.question
-//            optionA = request.optionA
-//            optionB = request.optionB
-//            answer = request.answer
-//            description = request.description
-//        }
-//
-        quizRepository.findByIdOrNull(id)?.run{
+        quizRepository.findByIdOrNull(id)?.apply{
                 question = request.question
                 optionA = request.optionA
                 optionB = request.optionB

@@ -24,7 +24,7 @@ class QuizRestController(
     @GetMapping("/list")
     fun getAll(
 
-    ) = quizService.getAll()
+    ) = quizService.getAll().map { it.toResponse() }
 
     @GetMapping("/{id}")
     fun get(

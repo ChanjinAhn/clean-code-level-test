@@ -1,7 +1,7 @@
 package io.olkkani.cleancodeleveltest.domain
 
 import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedBy
+import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 import javax.persistence.EntityListeners
@@ -14,6 +14,6 @@ abstract class BaseEntity (
     @CreatedDate
     var createdAt: LocalDateTime? = null,
 
-    @LastModifiedBy
+    @LastModifiedDate
     var updatedAt: LocalDateTime? = null,
 )
