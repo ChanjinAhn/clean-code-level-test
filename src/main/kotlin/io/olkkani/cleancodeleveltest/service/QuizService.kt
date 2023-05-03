@@ -5,7 +5,7 @@ import io.olkkani.cleancodeleveltest.domain.Quiz
 import io.olkkani.cleancodeleveltest.domain.QuizRepository
 import io.olkkani.cleancodeleveltest.domain.QuizRepositorySupport
 import io.olkkani.cleancodeleveltest.model.QuizRequest
-import io.olkkani.cleancodeleveltest.model.toResponse
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -31,8 +31,8 @@ class QuizService(
     }
 
     @Transactional(readOnly = true)
-    fun getAll() =
-        quizRepository.findAll()
+    fun getAll(pageable: Pageable) = quizRepository.findQuizzesBy(pageable)
+
 
 //    @Transactional(readOnly = true)
 //    fun getList(): MutableList<Quiz> {
