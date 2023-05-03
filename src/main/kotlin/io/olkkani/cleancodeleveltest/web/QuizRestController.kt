@@ -3,12 +3,12 @@ package io.olkkani.cleancodeleveltest.web
 import io.olkkani.cleancodeleveltest.model.QuizRequest
 import io.olkkani.cleancodeleveltest.model.toResponse
 import io.olkkani.cleancodeleveltest.service.QuizService
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/quiz/")
+@RequestMapping("/quizzes/")
 class QuizRestController(
     private val quizService: QuizService
 ) {
@@ -21,10 +21,10 @@ class QuizRestController(
         quizService.create(request)
     }
 
-    @GetMapping("/list")
+    @GetMapping
     fun getAll(
-
-    ) = quizService.getAll().map { it.toResponse() }
+        @RequestBody pageable: Pageable
+    ) = quizService.getAll(pageable).map { it.toResponse() }
 
     @GetMapping("/{id}")
     fun get(
@@ -47,12 +47,5 @@ class QuizRestController(
         @PathVariable id: Long
     ) {
         quizService.delete(id)
-
-//        return ResponseStatus
     }
-
-
-//    @GetMapping
-//    fun getRandomList() = quizService.getRandomList()
-
 }

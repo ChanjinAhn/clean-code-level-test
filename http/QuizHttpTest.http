@@ -1,11 +1,11 @@
 # QuizRestController
 
 ### Create Quiz
-POST http://localhost:8080/quiz/
+POST http://localhost:8080/quizzes/
 Content-Type: application/json
 
 {
-"question": "질문",
+"question": "질문1",
 "optionA": "선택지 A",
 "optionB": "선택지 B",
 "answer": "B",
@@ -13,10 +13,10 @@ Content-Type: application/json
 }
 
 ### Get Quiz
-GET http://localhost:8080/quiz/1
+GET http://localhost:8080/quizzes/1
 
 ### Edit Quiz
-PUT http://localhost:8080/quiz/1
+PUT http://localhost:8080/quizzes/1
 Content-Type: application/json
 
 {
@@ -28,8 +28,8 @@ Content-Type: application/json
 }
 
 ### Get edited Quiz
-GET http://localhost:8080/quiz/1
+GET http://localhost:8080/quizzes/1
 
 
 ### Get Quiz NotFound
-GET http://localhost:8080/quiz/2
+GET http://localhost:8080/quizzes/2
