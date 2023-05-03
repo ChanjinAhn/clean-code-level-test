@@ -1,38 +1,55 @@
 spring.profiles.group:
-  "test": "common,local-db-h2"
+  "test": "common,local,local-db-h2"
 ---
 # common
 spring:
   config:
     activate:
       on-profile: common
+      thymeleaf:
+        prefix: classpath:templates/
+        suffix: .html
 ---
+
+
+---
+# Local
 spring:
-  h2:
-    console:
+  profiles:
+    active: local
+  devtools:
+    livereload:
       enabled: true
-      path: /h2-console
-
-  datasource:
-    url: jdbc:h2:~/test
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
-  sql:
-    init:
-      mode: always
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-
+  thymeleaf:
+    cache: false
+    check-template-location: true
+  server:
+    port: 8080
+    undertow:
+      threads:
+        io: 16
+        worker: 400
+---
+# server
+spring:
+  profiles:
+    active: server
+  devtools:
+    livereload:
+      enable: false
 
 ---
 # DB - H2
 spring:
   profiles:
     active: local-db-h2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
   jpa:
     showSql: true
     properties:
