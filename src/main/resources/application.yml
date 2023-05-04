@@ -6,9 +6,9 @@ spring:
   config:
     activate:
       on-profile: common
-      thymeleaf:
-        prefix: classpath:templates/
-        suffix: .html
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
 ---
 
 
