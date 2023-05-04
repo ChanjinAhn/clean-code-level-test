@@ -9,6 +9,8 @@ plugins {
 	id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
 	id("org.jetbrains.kotlin.kapt") version "1.6.10"
 
+	id("com.github.node-gradle.node") version "4.0.0"
+
 	idea
 }
 
@@ -102,11 +104,19 @@ kotlin.sourceSets.main {
 //}
 
 // querydsl 추가
-
 idea {
 	module {
 		val kaptMain = file("build/generated/source/kapt/main")
 		sourceDirs.add(kaptMain)
 		generatedSourceDirs.add(kaptMain)
 	}
+}
+
+
+// npm 설정
+node{
+	version.set("16.16.0")
+	npmVersion.set("8.11.0")
+	download.set(true)
+	nodeProjectDir.set(file("${project.projectDir}/src/main/resources/static"))
 }
