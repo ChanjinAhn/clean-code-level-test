@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}" lang="kr">
+
+<!-- index.html 고유 CSS 추가 -->
+
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">
+</th:block>
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+  <script th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>
+  <script type="text/javascript" th:src="@{/js/questions/list.js}"></script>
+</th:block>
+
+<!-- Content -->
+<div layout:fragment="content">
+  <div>
+    <button type="button" id="register_button">신규 버튼</button>
+  </div>
+  <div id="questionList"></div>
+
+
+
+</div>
+</html>
+
+
+<script th:inline="javascript">
+  let grid;
+  grid = new tui.Grid({
+    el: document.getElementById('questionList'),
+    data: {
+      api: {
+        // readData: { url: '/questions', method: 'GET' }
+      }
+    },
+    scrollX: false,
+    scrollY: false,
+    minBodyHeight: 30,
+    rowHeaders: ['rowNum'],
+    pageOptions: {
+      perPage: 10
+    },
+    columns: [
+      {
+        header: '문제',
+        name: 'name'
+      },
+      {
+        header: '정답률',
+        name: 'artist'
+      },
+      {
+        header: '수정일',
+        name: 'type'
+      }
+    ]
+  });
+
+  const registerButton = document.getElementById("register_button")
+  registerButton.addEventListener('click', function () {
+    console.log("ddd")
+    location.href = "/question/register"
+  })
+</script>

@@ -15,19 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam
 class QuizController (
     private val quizService: QuizService
 ){
-//    @GetMapping
-//    fun list (
-//        model: Model
-//    ): String {
-//        val quizzes = quizService.getList().map { it.toResponse()}
-//        model.addAttribute("quizzes", quizzes)
-//        return "list"
-//    }
+
+    @GetMapping("/list")
+    fun list (
+    ) = "pages/list"
+
 
     @GetMapping("/register")
     fun register (
 
-    ) = "register"
+    ) = "pages/register"
 
     @PostMapping("/editor")
     fun editor (
@@ -36,18 +33,18 @@ class QuizController (
     ): String {
         val quiz = quizService.get(id).toResponse()
         model.addAttribute( "quiz", quiz)
-        return "editor"
+        return "pages/editor"
     }
 
-    @GetMapping("/level-test")
+    @GetMapping
     fun quiz (
         model : Model
     ) : String{
         val quizzes = quizService.getRandomList()?.map { it.toResponse()}
         model.addAttribute("quizzes", quizzes)
-        return "quiz"
+        return "pages/level-test"
     }
 
     @PostMapping("/result")
-    fun result () = "result"
+    fun result () = "pages/result"
 }
