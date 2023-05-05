@@ -19,20 +19,25 @@
 <!-- Content -->
 <div layout:fragment="content">
   <div>
-    <button type="button" id="register_button">신규 버튼</button>
+    <button type="button" id="register_button">신규ddd 버튼</button>
   </div>
-  <div id="questionList"></div>
+  <div id="quizzesList"></div>
 
-
+  <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+  <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 
 </div>
 </html>
 
 
-<script th:inline="javascript">
+<!--<script th:inline="javascript">-->
+
+<script>
   let grid;
+
+
   grid = new tui.Grid({
-    el: document.getElementById('questionList'),
+    el: document.getElementById('quizzesList'),
     data: {
       api: {
         // readData: { url: '/questions', method: 'GET' }
@@ -63,7 +68,17 @@
 
   const registerButton = document.getElementById("register_button")
   registerButton.addEventListener('click', function () {
-    console.log("ddd")
-    location.href = "/question/register"
+    moveRegisterPage()
   })
+
+
+
+  function moveRegisterPage(){
+    window.location.href = "register"
+  }
+
+  function moveEditPage(id){
+    window.location.href = "edit/" + id
+  }
+
 </script>
