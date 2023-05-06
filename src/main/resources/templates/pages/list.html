@@ -8,12 +8,14 @@
 
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">
+<!--  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">-->
 </th:block>
 <!-- index.html 고유 스크립트 추가 -->
 <th:block layout:fragment="script">
-  <script th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>
-  <script type="text/javascript" th:src="@{/js/questions/list.js}"></script>
+<!--  <script th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>-->
+<!--  <script type="text/javascript" th:src="@{/js/questions/list.js}"></script>-->
+  <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+  <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 </th:block>
 
 <!-- Content -->
@@ -23,62 +25,90 @@
   </div>
   <div id="quizzesList"></div>
 
-  <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-  <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+  <div id="grid">ddd</div>
 
 </div>
 </html>
 
-
-<!--<script th:inline="javascript">-->
-
 <script>
-  let grid;
-
-
-  grid = new tui.Grid({
-    el: document.getElementById('quizzesList'),
-    data: {
-      api: {
-        // readData: { url: '/questions', method: 'GET' }
-      }
-    },
+  const grid = new tui.Grid({
+    el: document.getElementById('grid'),
+    // data: gridData,
     scrollX: false,
     scrollY: false,
-    minBodyHeight: 30,
-    rowHeaders: ['rowNum'],
-    pageOptions: {
-      perPage: 10
-    },
     columns: [
       {
-        header: '문제',
+        header: 'Name',
         name: 'name'
       },
       {
-        header: '정답률',
+        header: 'Artist',
         name: 'artist'
       },
       {
-        header: '수정일',
+        header: 'Type',
         name: 'type'
+      },
+      {
+        header: 'Release',
+        name: 'release'
+      },
+      {
+        header: 'Genre',
+        name: 'genre'
       }
     ]
   });
-
-  const registerButton = document.getElementById("register_button")
-  registerButton.addEventListener('click', function () {
-    moveRegisterPage()
-  })
-
-
-
-  function moveRegisterPage(){
-    window.location.href = "register"
-  }
-
-  function moveEditPage(id){
-    window.location.href = "edit/" + id
-  }
-
 </script>
+<!--<script th:inline="javascript">-->
+
+<!--<script>-->
+<!--  let grid;-->
+
+
+<!--  grid = new tui.Grid({-->
+<!--    el: document.getElementById('quizzesList'),-->
+<!--    data: {-->
+<!--      api: {-->
+<!--        // readData: { url: '/questions', method: 'GET' }-->
+<!--      }-->
+<!--    },-->
+<!--    scrollX: false,-->
+<!--    scrollY: false,-->
+<!--    minBodyHeight: 30,-->
+<!--    rowHeaders: ['rowNum'],-->
+<!--    pageOptions: {-->
+<!--      perPage: 10-->
+<!--    },-->
+<!--    columns: [-->
+<!--      {-->
+<!--        header: '문제',-->
+<!--        name: 'name'-->
+<!--      },-->
+<!--      {-->
+<!--        header: '정답률',-->
+<!--        name: 'artist'-->
+<!--      },-->
+<!--      {-->
+<!--        header: '수정일',-->
+<!--        name: 'type'-->
+<!--      }-->
+<!--    ]-->
+<!--  });-->
+
+<!--  const registerButton = document.getElementById("register_button")-->
+<!--  registerButton.addEventListener('click', function () {-->
+<!--    moveRegisterPage()-->
+<!--  })-->
+
+
+
+<!--  function moveRegisterPage(){-->
+<!--    window.location.href = "register"-->
+<!--  }-->
+
+<!--  function moveEditPage(id){-->
+<!--    window.location.href = "edit/" + id-->
+<!--  }-->
+
+<!--</script>-->
