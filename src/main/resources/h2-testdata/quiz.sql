@@ -1,0 +1,10 @@
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
+insert into quiz(question, answer, optionA, optionB, description) values ('a',0,'111', '222', 'sdff');
