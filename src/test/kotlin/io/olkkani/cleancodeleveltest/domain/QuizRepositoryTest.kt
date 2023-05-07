@@ -29,7 +29,7 @@ class QuizRepositoryTest(
         // given
         val quiz = Quiz(
             question = "test question",
-            answer = AnswerOption.A,
+            answer = AnswerOption.OPTION_B,
             optionA = "test optionA",
             optionB = "test optionB",
             description = "test description"
@@ -49,7 +49,7 @@ class QuizRepositoryTest(
             quizRepository.save(
                 Quiz(
                     question = "질문 $i",
-                    answer = AnswerOption.A,
+                    answer = AnswerOption.OPTION_A,
                     optionA = "test optionA",
                     optionB = "test optionB",
                     description = "test description"
@@ -79,7 +79,7 @@ class QuizRepositoryTest(
             quizRepository.save(
                 Quiz(
                     question = "질문 $i",
-                    answer = AnswerOption.A,
+                    answer = AnswerOption.OPTION_B,
                     optionA = "test optionA",
                     optionB = "test optionB",
                     description = "test description"
@@ -105,7 +105,7 @@ class QuizRepositoryTest(
         // given
         val quiz = Quiz(
             question = "최초 질문",
-            answer = AnswerOption.A,
+            answer = AnswerOption.OPTION_A,
             optionA = "test optionA",
             optionB = "test optionB",
             description = "test description"

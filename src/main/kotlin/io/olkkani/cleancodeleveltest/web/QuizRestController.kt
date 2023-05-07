@@ -1,9 +1,10 @@
 package io.olkkani.cleancodeleveltest.web
 
 import io.olkkani.cleancodeleveltest.model.QuizRequest
+import io.olkkani.cleancodeleveltest.model.toPaginationResponse
 import io.olkkani.cleancodeleveltest.model.toResponse
 import io.olkkani.cleancodeleveltest.service.QuizService
-import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -23,8 +24,9 @@ class QuizRestController(
 
     @GetMapping
     fun getAll(
-        @RequestBody pageable: Pageable
-    ) = quizService.getAll(pageable).map { it.toResponse() }
+        @RequestParam(defaultValue = "10") perPage : Int,
+        @RequestParam(defaultValue = "0") page : Int
+    ) = quizService.getAll(PageRequest.of(page,perPage)).toPaginationResponse()
 
     @GetMapping("/{id}")
     fun get(
