@@ -28,7 +28,7 @@ class QuizController (
 
     @PostMapping("/editor")
     fun editor (
-       id: Long,
+       @RequestParam id: Long,
        model: Model
     ): String {
         val quiz = quizService.get(id).toResponse()
