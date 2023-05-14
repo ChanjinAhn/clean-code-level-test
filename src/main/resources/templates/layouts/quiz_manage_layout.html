@@ -13,11 +13,12 @@
 
 <!-- content script -->
 <!--  <script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.slim.js}"></script>-->
+<script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
 <script type="text/javascript" src ="/js/quiz.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <th:block layout:fragment="script"></th:block>
 
-<body class="">
+<body class="dark:bg-stone-900">
 <!-- header fragment 사용 -->
 <th:block th:replace="fragments/quiz_manage_header :: quiz_manage_header"></th:block>
 <!-- content fragment 사용 -->
