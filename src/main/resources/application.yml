@@ -9,6 +9,8 @@ spring:
   thymeleaf:
     prefix: classpath:templates/
     suffix: .html
+  resource:
+    static-locations: classpath:/static
 ---
 
 
