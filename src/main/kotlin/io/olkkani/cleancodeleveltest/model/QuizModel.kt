@@ -38,7 +38,7 @@ fun Page<Quiz>.toPaginationResponse(): Map<String, Any> {
     return mutableMapOf<String, Any>().apply {
         put("result", true)
         put("data", mapOf<String, Any>(
-            "content" to content,
+            "contents" to content,
             "pagination" to mapOf<String, Any>(
                 "page" to page,
                 "totalCount" to totalPageCount,
