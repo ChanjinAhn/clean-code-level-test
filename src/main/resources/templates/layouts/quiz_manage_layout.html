@@ -2,23 +2,22 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      class="dark"
+      class=""
 >
 
 <meta charset="UTF-8"/>
 
-<link rel="stylesheet" th:href="@{/node_modules/tailwindcss/tailwind.css}">
+<!--<link rel="stylesheet" th:href="@{/node_modules/tailwindcss/tailwind.css}">-->
+<script src="https://cdn.tailwindcss.com"></script>
 <th:block layout:fragment="css"></th:block>
 
-<!--<script type="text/javascript" src ="/js/quiz.js"></script>-->
-
-
 <script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.slim.js}"></script>
+<!--<script type="text/javascript" src ="/js/quiz.js"></script>-->
 <th:block layout:fragment="script"></th:block>
 
 <th:block th:replace="fragments/quiz_manage_header :: quiz_manage_header"></th:block>
 
-<body class="dark:bg-stone-900 inline-block align-baseline">
+<body class="">
     <th:block layout:fragment="content"></th:block>
 </body>
 <!-- footer fragment 사용 -->
