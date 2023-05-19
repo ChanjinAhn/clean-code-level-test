@@ -4,25 +4,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/quiz_manage_layout }" lang="kr">
 
-<!-- index.html 고유 CSS 추가 -->
-
-
 <th:block layout:fragment="css">
-<!--  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">-->
+  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-pagination/dist/tui-pagination.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">
 </th:block>
-<!-- index.html 고유 스크립트 추가 -->
+
 <th:block layout:fragment="script">
-<!--  <script th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>-->
-<!--  <script type="text/javascript" th:src="@{/js/questions/list.js}"></script>-->
-
-  <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-  <script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-
-  <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-  <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+  <script type="text/javascript" th:src="@{/node_modules/tui-pagination/dist/tui-pagination.js}"></script>
+  <script type="text/javascript" th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>
+  <script type="text/javascript" th:src="@{/js/quiz.js}"></script>
 </th:block>
 
-<!-- Content -->
+
 <div layout:fragment="content">
   <div>
     <button type="button" id="register_button">새로운 문제 추가하기</button>
@@ -37,14 +30,12 @@
     api: {
       readData: {url: '/quizzes/', method: 'GET'}
     },
-    initialRequest: false,
   }
 
   let grid = new tui.Grid({
-    el: document.getElementById('grid'),
+    el: document.getElementById('quizzesList'),
     data: quizAPI,
-
-    ContentType: 'application/json',
+    contentType: 'application/json',
     rowHeaders: ['rowNum'],
     pageOptions: {
       perPage: 10
@@ -52,6 +43,11 @@
     scrollX: false,
     scrollY: false,
     columns: [
+      {
+        header: 'id',
+        name: 'id',
+        hidden: true
+      },
       {
         header: '질문',
         name: 'question'
@@ -61,21 +57,27 @@
         name: 'answer',
         maxWidth: 3
       }
-    ]
+    ],
+    showDummyRows: true
   });
 
   const registerButton = document.getElementById("register_button")
+  function getColumnId(el){
+    return grid.getFormattedValue(el.rowKey, 'id')
+  }
 
   registerButton.addEventListener('click', function () {
     moveRegisterPage()
   })
 
-  function getId(){
-
-  }
 
 
+  grid.on('click', el => {
+    const id = getColumnId(el)
+    if(!id) return null
 
+    moveEditPage(id)
+  })
 
 
 </script>
