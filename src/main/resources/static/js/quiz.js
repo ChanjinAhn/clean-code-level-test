@@ -3,7 +3,7 @@ function moveRegisterPage(){
 }
 
 function moveEditPage(id){
-    window.location.href = "editor/" + id
+    window.location.href = "/editor/" + id
 }
 
 
@@ -13,5 +13,5 @@ function validateQuizForm() {
 
 
 function moveListPage() {
-    location.replace("list")
+    location.replace("/list")
 }
