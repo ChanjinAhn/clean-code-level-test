@@ -17,7 +17,7 @@ data class QuizResponse(
     val question: String,
     val optionA: String,
     val optionB: String,
-    val answer: AnswerOption,
+    val answer: String,
     val description: String,
 )
 
@@ -26,7 +26,7 @@ fun Quiz.toResponse() = QuizResponse(
     question = question,
     optionA = optionA,
     optionB = optionB,
-    answer = answer,
+    answer = answer.code,
     description = description
 )
 
