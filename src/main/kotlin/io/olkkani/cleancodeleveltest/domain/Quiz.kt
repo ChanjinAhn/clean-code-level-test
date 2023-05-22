@@ -24,7 +24,7 @@ class Quiz(
 ) : BaseEntity()
 
 
-enum class AnswerOption(var code: String, var value: Long) {
+enum class AnswerOption(val code: String, val value: Long) {
     OPTION_A("A",0),
     OPTION_B("B",1);
 

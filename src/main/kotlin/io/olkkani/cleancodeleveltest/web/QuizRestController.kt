@@ -1,5 +1,6 @@
 package io.olkkani.cleancodeleveltest.web
 
+import QuizRequest
 import io.olkkani.cleancodeleveltest.model.QuizRequest
 import io.olkkani.cleancodeleveltest.model.toPaginationResponse
 import io.olkkani.cleancodeleveltest.model.toResponse
@@ -19,6 +20,7 @@ class QuizRestController(
     fun create(
         @RequestBody request: QuizRequest
     ) {
+        println(request.answer.code)
         quizService.create(request)
     }
 
