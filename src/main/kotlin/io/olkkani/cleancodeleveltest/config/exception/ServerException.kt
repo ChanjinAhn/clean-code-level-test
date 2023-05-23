@@ -16,3 +16,8 @@ data class UnAuthorizedException(
 ): ServerException(401, message)
 
 
+data class IllegalArgumentException(
+    override val message: String,
+): ServerException(400, message)
+
+
