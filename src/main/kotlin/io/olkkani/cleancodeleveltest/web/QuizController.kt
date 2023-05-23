@@ -1,15 +1,12 @@
 package io.olkkani.cleancodeleveltest.web
 
-import io.olkkani.cleancodeleveltest.model.toResponse
 import io.olkkani.cleancodeleveltest.service.QuizService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import toResponse
 
 @Controller
 class QuizController (
@@ -35,6 +32,7 @@ class QuizController (
         model.addAttribute( "quiz", quiz)
         return "pages/editor"
     }
+
 
     @GetMapping
     fun quiz (

@@ -1,13 +1,13 @@
 package io.olkkani.cleancodeleveltest.web
 
 import QuizRequest
-import io.olkkani.cleancodeleveltest.model.QuizRequest
-import io.olkkani.cleancodeleveltest.model.toPaginationResponse
-import io.olkkani.cleancodeleveltest.model.toResponse
+import io.olkkani.cleancodeleveltest.domain.AnswerOption
 import io.olkkani.cleancodeleveltest.service.QuizService
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import toPaginationResponse
+import toResponse
 
 @RestController
 @RequestMapping("/quizzes/")
@@ -20,7 +20,6 @@ class QuizRestController(
     fun create(
         @RequestBody request: QuizRequest
     ) {
-        println(request.answer.code)
         quizService.create(request)
     }
 

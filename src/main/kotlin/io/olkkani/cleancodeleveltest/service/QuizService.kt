@@ -1,10 +1,12 @@
 package io.olkkani.cleancodeleveltest.service
 
+import QuizRequest
+import io.olkkani.cleancodeleveltest.config.exception.IllegalArgumentException
 import io.olkkani.cleancodeleveltest.config.exception.NotFoundException
+import io.olkkani.cleancodeleveltest.domain.AnswerOption
 import io.olkkani.cleancodeleveltest.domain.Quiz
 import io.olkkani.cleancodeleveltest.domain.QuizRepository
 import io.olkkani.cleancodeleveltest.domain.QuizRepositorySupport
-import io.olkkani.cleancodeleveltest.model.QuizRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -23,7 +25,7 @@ class QuizService(
             question = request.question,
             optionA = request.optionA,
             optionB = request.optionB,
-            answer = request.answer,
+            answer = AnswerOption to request.answer,
             description = request.description
         )
         quizRepository.save(question)
@@ -33,11 +35,6 @@ class QuizService(
     @Transactional(readOnly = true)
     fun getAll(pageable: Pageable) = quizRepository.findQuizzesBy(pageable)
 
-
-//    @Transactional(readOnly = true)
-//    fun getList(): MutableList<Quiz> {
-//        return quizRepository.findAll()
-//    }
 
     @Transactional(readOnly = true)
     fun get(id: Long): Quiz {
@@ -56,7 +53,7 @@ class QuizService(
                 question = request.question
                 optionA = request.optionA
                 optionB = request.optionB
-                answer = request.answer
+                answer = AnswerOption to request.answer
                 description = request.description
             } ?: throw NotFoundException("질문이 존재하지 않습니다.")
     }

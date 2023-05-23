@@ -1,5 +1,5 @@
-package io.olkkani.cleancodeleveltest.model
 
+import io.olkkani.cleancodeleveltest.config.exception.IllegalArgumentException
 import io.olkkani.cleancodeleveltest.domain.AnswerOption
 import io.olkkani.cleancodeleveltest.domain.Quiz
 import org.springframework.data.domain.Page
@@ -8,8 +8,8 @@ data class QuizRequest(
     val question: String,
     val optionA: String,
     val optionB: String,
-    val answer: AnswerOption,
     val description: String,
+    val answer: String,
 )
 
 data class QuizResponse(

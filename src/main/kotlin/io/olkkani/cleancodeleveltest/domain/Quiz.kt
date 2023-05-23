@@ -1,5 +1,6 @@
 package io.olkkani.cleancodeleveltest.domain
 
+import io.olkkani.cleancodeleveltest.config.exception.IllegalArgumentException
 import javax.persistence.*
 
 
@@ -24,12 +25,13 @@ class Quiz(
 ) : BaseEntity()
 
 
-enum class AnswerOption(val code: String, val value: Long) {
-    OPTION_A("A",0),
-    OPTION_B("B",1);
+enum class AnswerOption(var code: String, var value: Long) {
+    OPTION_A("A", 0),
+    OPTION_B("B", 1);
 
-    companion object {
-        infix fun from(value: Long?): AnswerOption? = AnswerOption.values().firstOrNull { it.value == value }
+    companion object{
+        infix fun from(value: Long?): AnswerOption = AnswerOption.values().firstOrNull { it.value == value }?: throw IllegalArgumentException("정답의 선택지가 저장된 값과 다릅니다.")
+        infix fun to(code: String?): AnswerOption = AnswerOption.values().firstOrNull(){it.code == code} ?: throw IllegalArgumentException("정답의 선택지가 존재하지 않습니다.")
     }
 }
 
