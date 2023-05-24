@@ -4,7 +4,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/quiz_manage_layout}" lang="kr">
 
-
 <div layout:fragment="content">
     <main class="">
 
@@ -13,7 +12,7 @@
         <!-- Create by joker banny -->
         <div class="h-screen flex justify-center items-center">
             <div class="lg:w-2/5 md:w-1/2 w-2/3">
-                <form class="bg-white p-10 rounded-lg shadow-lg min-w-full">
+                <form class="bg-white p-10 rounded-lg shadow-lg min-w-full" id="form">
                     <h1 class="text-center text-xl mb-3 text-gray-600 font-bold font-sans">Formregister</h1>
 
 
@@ -46,26 +45,30 @@
                     <div class="sm:col-span-2">
                         <label for="question" class="block text-sm font-semibold leading-6 text-gray-900">Option A</label>
                         <div class="mt-2.5">
-                            <textarea name="question" id="question" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                            <textarea name="optionA" id="option_a" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                         </div>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="question" class="block text-sm font-semibold leading-6 text-gray-900">Option B</label>
                         <div class="mt-2.5">
-                            <textarea name="question" id="question" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                            <textarea name="optionB" id="option_b" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                         </div>
                     </div>
 
                     <div class="sm:col-span-2">
                         <label for="question" class="block text-sm font-semibold leading-6 text-gray-900">Answer Description</label>
                         <div class="mt-2.5">
-                            <textarea name="question" id="question" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                            <textarea name="description" id="description" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                         </div>
                     </div>
+                    <div>
+                        <button type="button" id="return_button" >되돌아가기</button>
                     <button type="submit"
-                            class="w-full mt-6 bg-indigo-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans">
+                            class="w-full mt-6 bg-indigo-600 rounded-lg px-4 py-2 text-lg text-white tracking-wide font-semibold font-sans"
+                        id="register_button">
                         등록
                     </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -73,16 +76,68 @@
 </div>
 </html>
 
-<script>
+<script th:inline="javascript">
 
-    function createQuiz() {
+
+    const registerButton = document.getElementById("register_button")
+    const registerForm = document.getElementById("form")
+    const returnButton = document.getElementById("return_button")
+    let createQuiz = (formData) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: 'post',
+                url: '/quizzes/',
+                headers: {
+                    "Content=Type" : "application/json"
+                },
+                data: formData
+            })
+                .done(()=> {resolve()})
+                .fail((xhr, status, error) => {reject(error)})
+        })
+    }
+
+    function disabledButton(element) {
+
+    }
+    function enabledButton(element) {
 
     }
 
+    function getFormData(){
+        return null
+    }
+
+    function validateFormData(){}
 
     function createErrorPopup() {
         alert("등록 중 오류가 발생하였습니다.\n잠시 후 다시 시도해주시길 바랍니다.")
     }
 
+    function createdPopup() {
+
+    }
+
+    registerForm.onsubmit = function (){
+        disabledButton(registerButton)
+        const formData = getFormData()
+        if(!validateFormData()){
+
+            return
+        }
+
+        createQuiz(formData).then(() => {
+            createdPopup()
+            moveListPage()
+        }).catch(e => {
+            createErrorPopup()
+            console.log(e)
+            enabledButton(registerButton)
+        })
+    }
+
+    returnButton.on('click', () => {
+        moveListPage()
+    })
 
 </script>
