@@ -5,6 +5,7 @@ import io.olkkani.cleancodeleveltest.domain.Quiz
 import org.springframework.data.domain.Page
 
 data class QuizRequest(
+    val quizType: String,
     val question: String,
     val optionA: String,
     val optionB: String,
@@ -14,6 +15,7 @@ data class QuizRequest(
 
 data class QuizResponse(
     val id: Long,
+    val quizType: String,
     val question: String,
     val optionA: String,
     val optionB: String,
@@ -23,6 +25,7 @@ data class QuizResponse(
 
 fun Quiz.toResponse() = QuizResponse(
     id = id!!,
+    quizType = quizType.code,
     question = question,
     optionA = optionA,
     optionB = optionB,
