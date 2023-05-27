@@ -7,7 +7,9 @@ import javax.persistence.*
 @Entity
 @Table
 class Quiz(
-
+    @Column
+    @Convert(converter = QuizTypeOptionConverter::class)
+    var quizType: QuizTypeOption,
     @Column
     var question: String,
     @Column
@@ -24,6 +26,27 @@ class Quiz(
     val id: Long? = null,
 ) : BaseEntity()
 
+enum class QuizTypeOption(var code: String, var value: Long){
+
+    OPTION_A("A", 0),
+    OPTION_B("B", 1);
+
+    companion object{
+        infix fun from(value: Long?): QuizTypeOption = QuizTypeOption.values().firstOrNull { it.value == value }?: throw IllegalArgumentException("문제 타입이 저장된 값과 다릅니다.")
+        infix fun to(code: String?): QuizTypeOption = QuizTypeOption.values().firstOrNull(){it.code == code} ?: throw IllegalArgumentException("문제 타입이 존재하지 않습니다.")
+    }
+}
+
+
+@Converter
+class QuizTypeOptionConverter : AttributeConverter<QuizTypeOption, Long> {
+    override fun convertToDatabaseColumn(quizTypeOption: QuizTypeOption): Long {
+        return quizTypeOption.value
+    }
+    override fun convertToEntityAttribute(dbData: Long): QuizTypeOption? {
+        return QuizTypeOption from dbData
+    }
+}
 
 enum class AnswerOption(var code: String, var value: Long) {
     OPTION_A("A", 0),
