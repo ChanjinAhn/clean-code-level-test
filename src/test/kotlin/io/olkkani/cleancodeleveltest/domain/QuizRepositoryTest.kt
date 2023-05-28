@@ -28,6 +28,7 @@ class QuizRepositoryTest(
     fun createQuizTest() {
         // given
         val quiz = Quiz(
+            quizType = QuizTypeOption.OPTION_A,
             question = "test question",
             answer = AnswerOption.OPTION_B,
             optionA = "test optionA",
@@ -48,6 +49,7 @@ class QuizRepositoryTest(
         for (i in 1 .. 20) {
             quizRepository.save(
                 Quiz(
+                    quizType = QuizTypeOption.OPTION_A,
                     question = "질문 $i",
                     answer = AnswerOption.OPTION_A,
                     optionA = "test optionA",
@@ -78,6 +80,7 @@ class QuizRepositoryTest(
         for (i in 1 .. 20){
             quizRepository.save(
                 Quiz(
+                    quizType = QuizTypeOption.OPTION_A,
                     question = "질문 $i",
                     answer = AnswerOption.OPTION_B,
                     optionA = "test optionA",
@@ -104,6 +107,7 @@ class QuizRepositoryTest(
     fun editQuizTest() {
         // given
         val quiz = Quiz(
+            quizType = QuizTypeOption.OPTION_A,
             question = "최초 질문",
             answer = AnswerOption.OPTION_A,
             optionA = "test optionA",
