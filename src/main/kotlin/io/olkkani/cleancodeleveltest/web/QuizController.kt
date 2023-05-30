@@ -1,10 +1,12 @@
 package io.olkkani.cleancodeleveltest.web
 
+import QuizRequest
 import io.olkkani.cleancodeleveltest.service.QuizService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import toResponse
 
@@ -22,6 +24,14 @@ class QuizController (
     fun register (
 
     ) = "pages/register"
+
+    @PostMapping("/register")
+    fun create (
+        @RequestBody quizRequest: QuizRequest
+    ): String{
+        quizService.create(quizRequest)
+        return "redirect:/list"
+    }
 
     @PostMapping("/editor")
     fun editor (
