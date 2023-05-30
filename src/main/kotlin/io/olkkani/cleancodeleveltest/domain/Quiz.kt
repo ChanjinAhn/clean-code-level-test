@@ -7,14 +7,14 @@ import javax.persistence.*
 @Entity
 @Table
 class Quiz(
-    @Column
+    @Column(name = "quiz_type")
     @Convert(converter = QuizTypeOptionConverter::class)
     var quizType: QuizTypeOption,
     @Column
     var question: String,
-    @Column
+    @Column(name = "option_a")
     var optionA: String,
-    @Column
+    @Column(name = "option_b")
     var optionB: String,
     @Convert(converter = AnswerOptionConverter::class)
     @Column
