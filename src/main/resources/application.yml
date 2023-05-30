@@ -11,7 +11,6 @@ spring:
     suffix: .html
   resource:
     static-locations: classpath:/static
----
 
 
 ---
@@ -24,7 +23,7 @@ spring:
       enabled: true
     restart:
       enabled: true
-
+## server
   thymeleaf:
     cache: false
     check-template-location: true
@@ -34,14 +33,20 @@ spring:
       threads:
         io: 16
         worker: 400
+
 ---
-# server
+# service server
 spring:
   profiles:
     active: server
   devtools:
     livereload:
       enable: false
+## DB, jpa config
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
 
 ---
 # DB - H2
@@ -56,16 +61,14 @@ spring:
     init:
       mode: always
       data-locations: classpath:h2-testdata/quiz.sql
+  ## DB, jpa config
   jpa:
     showSql: true
-    properties:
-      hibernate:
-        format_sql: true
-        ddl-auto: create
-        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      format_sql: true
+      ddl-auto: create
+      dialect: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
-
-
   datasource:
     url: jdbc:h2:~/cclt
     username: sa
