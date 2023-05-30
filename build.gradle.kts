@@ -64,7 +64,8 @@ dependencies {
 	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 
 	annotationProcessor("jakarta.persistence:jakarta.persistence-api:3.1.0")
-	annotationProcessor("jakarta.persistence:jakarta.annotation-api:3.1.0")
+	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+
 	annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
 
 	// view template
