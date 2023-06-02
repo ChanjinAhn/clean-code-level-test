@@ -55,19 +55,13 @@ dependencies {
 	testRuntimeOnly("com.h2database:h2:2.1.214")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-//	annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
-//	annotationProcessor("com.querydsl:querydsl-apt:5.0.0:jpa")
+	// QueryDSL
 	implementation("com.querydsl:querydsl-jpa:5.0.0")
 	implementation("com.querydsl:querydsl-apt:5.0.0")
-	implementation("javax.persistence:javax.persistence-api:2.2")
-
-	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
-
+	implementation("jakarta.annotation:jakarta.annotation-api:2.1.1")
 	annotationProcessor("jakarta.persistence:jakarta.persistence-api:3.1.0")
-	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
-
 	annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
-
+	kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 	// view template
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.0")
