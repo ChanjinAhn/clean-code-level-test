@@ -22,7 +22,6 @@ class QuizController (
 
     @GetMapping("/register")
     fun register (
-
     ) = "pages/register"
 
     @PostMapping("/register")

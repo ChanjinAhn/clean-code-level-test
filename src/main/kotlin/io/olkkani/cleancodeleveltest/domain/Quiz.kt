@@ -26,6 +26,7 @@ class Quiz(
     val id: Long? = null,
 ) : BaseEntity()
 
+
 enum class QuizTypeOption(var code: String, var value: Long){
 
     OPTION_A("A", 0),
