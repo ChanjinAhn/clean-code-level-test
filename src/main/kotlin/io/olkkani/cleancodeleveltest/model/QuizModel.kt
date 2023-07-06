@@ -34,7 +34,7 @@ fun Quiz.toResponse() = QuizResponse(
 )
 
 fun Page<Quiz>.toPaginationResponse(): Map<String, Any> {
-    val totalPageCount = this.totalPages
+    val totalCount = this.totalElements
     val content = this.content.map { it.toResponse() }
     val page = this.number
 
@@ -43,8 +43,8 @@ fun Page<Quiz>.toPaginationResponse(): Map<String, Any> {
         put("data", mapOf<String, Any>(
             "contents" to content,
             "pagination" to mapOf<String, Any>(
-                "page" to page,
-                "totalCount" to totalPageCount,
+                "page" to page+1,
+                "totalCount" to totalCount,
             )
         ))
     }

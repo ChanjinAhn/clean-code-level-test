@@ -27,7 +27,7 @@ class QuizRestController(
     fun getAll(
         @RequestParam(defaultValue = "10") perPage : Int,
         @RequestParam(defaultValue = "0") page : Int
-    ) = quizService.getAll(PageRequest.of(page,perPage)).toPaginationResponse()
+    ) = quizService.getAll(PageRequest.of(page-1,perPage)).toPaginationResponse()
 
     @GetMapping("/{id}")
     fun get(
