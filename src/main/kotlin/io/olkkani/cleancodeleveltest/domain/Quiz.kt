@@ -29,8 +29,8 @@ class Quiz(
 
 enum class QuizTypeOption(var code: String, var value: Long){
 
-    OPTION_A("A", 0),
-    OPTION_B("B", 1);
+    OPTION_A("CODE", 0),
+    OPTION_B("TEXT", 1);
 
     companion object{
         infix fun from(value: Long?): QuizTypeOption = QuizTypeOption.values().firstOrNull { it.value == value }?: throw IllegalArgumentException("문제 타입이 저장된 값과 다릅니다.")
