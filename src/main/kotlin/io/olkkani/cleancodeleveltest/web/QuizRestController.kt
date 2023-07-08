@@ -34,6 +34,8 @@ class QuizRestController(
         @PathVariable id: Long
     ) = quizService.get(id).toResponse()
 
+    @GetMapping("/random")
+    fun getRandomQuizzes() = quizService.getRandomList()?.map { it.toResponse() }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

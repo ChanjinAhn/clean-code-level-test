@@ -44,7 +44,7 @@ class QuizTypeOptionConverter : AttributeConverter<QuizTypeOption, Long> {
     override fun convertToDatabaseColumn(quizTypeOption: QuizTypeOption): Long {
         return quizTypeOption.value
     }
-    override fun convertToEntityAttribute(dbData: Long): QuizTypeOption? {
+    override fun convertToEntityAttribute(dbData: Long): QuizTypeOption {
         return QuizTypeOption from dbData
     }
 }
@@ -64,7 +64,7 @@ class AnswerOptionConverter : AttributeConverter<AnswerOption, Long> {
     override fun convertToDatabaseColumn(answerOption: AnswerOption): Long {
         return answerOption.value
     }
-    override fun convertToEntityAttribute(dbData: Long): AnswerOption? {
+    override fun convertToEntityAttribute(dbData: Long): AnswerOption {
         return AnswerOption from dbData
     }
 }

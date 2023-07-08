@@ -42,15 +42,8 @@ class QuizController (
         return "pages/editor"
     }
 
-
     @GetMapping
-    fun quiz (
-        model : Model
-    ) : String{
-        val quizzes = quizService.getRandomList()?.map { it.toResponse()}
-        model.addAttribute("quizzes", quizzes)
-        return "pages/level-test"
-    }
+    fun quiz () = "pages/level-test"
 
     @PostMapping("/result")
     fun result () = "pages/result"
