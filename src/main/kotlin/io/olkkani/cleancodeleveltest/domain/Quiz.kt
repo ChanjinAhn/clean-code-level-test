@@ -16,9 +16,11 @@ class Quiz(
     var optionA: String,
     @Column(name = "option_b")
     var optionB: String,
-    @Convert(converter = AnswerOptionConverter::class)
+    @Convert(converter = CorrectOptionConverter::class)
+    @Column(name = "correct_option")
+    var correctOption: CorrectOption,
     @Column
-    var answer: AnswerOption,
+    var answer: String,
     @Column
     var description: String,
     @Id
@@ -49,22 +51,22 @@ class QuizTypeOptionConverter : AttributeConverter<QuizTypeOption, Long> {
     }
 }
 
-enum class AnswerOption(var code: String, var value: Long) {
+enum class CorrectOption(var code: String, var value: Long) {
     OPTION_A("A", 0),
     OPTION_B("B", 1);
 
     companion object{
-        infix fun from(value: Long?): AnswerOption = AnswerOption.values().firstOrNull { it.value == value }?: throw IllegalArgumentException("정답의 선택지가 저장된 값과 다릅니다.")
-        infix fun to(code: String?): AnswerOption = AnswerOption.values().firstOrNull(){it.code == code} ?: throw IllegalArgumentException("정답의 선택지가 존재하지 않습니다.")
+        infix fun from(value: Long?): CorrectOption = CorrectOption.values().firstOrNull { it.value == value }?: throw IllegalArgumentException("정답의 선택지가 저장된 값과 다릅니다.")
+        infix fun to(code: String?): CorrectOption = CorrectOption.values().firstOrNull(){it.code == code} ?: throw IllegalArgumentException("정답의 선택지가 존재하지 않습니다.")
     }
 }
 
 @Converter
-class AnswerOptionConverter : AttributeConverter<AnswerOption, Long> {
-    override fun convertToDatabaseColumn(answerOption: AnswerOption): Long {
-        return answerOption.value
+class CorrectOptionConverter : AttributeConverter<CorrectOption, Long> {
+    override fun convertToDatabaseColumn(correctOption: CorrectOption): Long {
+        return correctOption.value
     }
-    override fun convertToEntityAttribute(dbData: Long): AnswerOption {
-        return AnswerOption from dbData
+    override fun convertToEntityAttribute(dbData: Long): CorrectOption {
+        return CorrectOption from dbData
     }
 }

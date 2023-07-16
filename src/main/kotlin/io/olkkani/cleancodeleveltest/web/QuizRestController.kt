@@ -1,7 +1,6 @@
 package io.olkkani.cleancodeleveltest.web
 
 import QuizRequest
-import io.olkkani.cleancodeleveltest.domain.AnswerOption
 import io.olkkani.cleancodeleveltest.service.QuizService
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus

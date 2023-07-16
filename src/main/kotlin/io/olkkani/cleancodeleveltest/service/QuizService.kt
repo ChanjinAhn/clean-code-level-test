@@ -1,7 +1,6 @@
 package io.olkkani.cleancodeleveltest.service
 
 import QuizRequest
-import io.olkkani.cleancodeleveltest.config.exception.IllegalArgumentException
 import io.olkkani.cleancodeleveltest.config.exception.NotFoundException
 import io.olkkani.cleancodeleveltest.domain.*
 import org.springframework.data.domain.Pageable
@@ -23,7 +22,8 @@ class QuizService(
             question = request.question,
             optionA = request.optionA,
             optionB = request.optionB,
-            answer = AnswerOption to request.answer,
+            correctOption = CorrectOption to request.answer,
+            answer = request.answer,
             description = request.description,
         )
         quizRepository.save(question)
@@ -52,7 +52,8 @@ class QuizService(
             question = request.question
             optionA = request.optionA
             optionB = request.optionB
-            answer = AnswerOption to request.answer
+            correctOption = CorrectOption to request.answer
+            answer = request.answer
             description = request.description
         } ?: throw NotFoundException("질문이 존재하지 않습니다.")
     }

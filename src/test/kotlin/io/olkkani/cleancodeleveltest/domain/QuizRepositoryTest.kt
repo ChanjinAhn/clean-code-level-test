@@ -30,9 +30,10 @@ class QuizRepositoryTest(
         val quiz = Quiz(
             quizType = QuizTypeOption.OPTION_A,
             question = "test question",
-            answer = AnswerOption.OPTION_B,
+            correctOption = CorrectOption.OPTION_B,
             optionA = "test optionA",
             optionB = "test optionB",
+            answer = "A 가 더 낫습니다.",
             description = "test description"
         )
         // when
@@ -51,9 +52,10 @@ class QuizRepositoryTest(
                 Quiz(
                     quizType = QuizTypeOption.OPTION_A,
                     question = "질문 $i",
-                    answer = AnswerOption.OPTION_A,
+                    correctOption = CorrectOption.OPTION_A,
                     optionA = "test optionA",
                     optionB = "test optionB",
+                    answer = "A 가 더 낫습니다.",
                     description = "test description"
                 )
             )
@@ -82,9 +84,10 @@ class QuizRepositoryTest(
                 Quiz(
                     quizType = QuizTypeOption.OPTION_A,
                     question = "질문 $i",
-                    answer = AnswerOption.OPTION_B,
+                    correctOption = CorrectOption.OPTION_B,
                     optionA = "test optionA",
                     optionB = "test optionB",
+                    answer = "A 가 더 낫습니다.",
                     description = "test description"
                 )
             )
@@ -109,9 +112,10 @@ class QuizRepositoryTest(
         val quiz = Quiz(
             quizType = QuizTypeOption.OPTION_A,
             question = "최초 질문",
-            answer = AnswerOption.OPTION_A,
+            correctOption = CorrectOption.OPTION_A,
             optionA = "test optionA",
             optionB = "test optionB",
+            answer = "A 가 더 낫습니다.",
             description = "test description"
         )
         val savedQuiz = quizRepository.save(quiz)
