@@ -1,3 +1,4 @@
+import com.github.gradle.node.npm.task.NpmTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -111,7 +112,32 @@ idea {
 // npm 설정
 node{
 	version.set("16.16.0")
-	npmVersion.set("8.11.0")
+	npmVersion.set("9.8.1")
 	download.set(true)
 	nodeProjectDir.set(file("${project.projectDir}/src/main/resources/static"))
 }
+
+//val installDependencies by tasks.registering(NpmTask::class) {
+//	setArgs(listOf("install"))
+//	setExecOverrides(closureOf<ExecSpec> {
+//		setWorkingDir("${project.projectDir}/front")
+//	})
+//}
+//val buildReactTask by tasks.registering(NpmTask::class) {
+//	 Before buildWeb can run, installDependencies must run
+//	dependsOn(installDependencies)
+//	setArgs(listOf("run", "build"))
+//	setExecOverrides(closureOf<ExecSpec> {
+//		setWorkingDir("${project.projectDir}/front")
+//	})
+//}
+//val copyTask by tasks.registering(Copy::class) {
+//	dependsOn(buildReactTask)
+//	from(file("${project.projectDir}/front/build"))
+//	into(file("${project.buildDir}/resources/main/static"))
+//}
+
+
+//tasks.bootJar{
+//	dependsOn(copyTask)
+//}
