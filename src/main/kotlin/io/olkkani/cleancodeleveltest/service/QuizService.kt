@@ -22,7 +22,7 @@ class QuizService(
             question = request.question,
             optionA = request.optionA,
             optionB = request.optionB,
-            correctOption = CorrectOption to request.answer,
+            correctOption = CorrectOption to request.correctOption,
             answer = request.answer,
             description = request.description,
         )
@@ -52,7 +52,7 @@ class QuizService(
             question = request.question
             optionA = request.optionA
             optionB = request.optionB
-            correctOption = CorrectOption to request.answer
+            correctOption = CorrectOption to request.correctOption
             answer = request.answer
             description = request.description
         } ?: throw NotFoundException("질문이 존재하지 않습니다.")
