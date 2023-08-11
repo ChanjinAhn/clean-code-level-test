@@ -2,18 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/quiz_manage_layout }" lang="kr">
+      layout:decorate="~{layouts/quiz-manage-layout }" lang="kr">
+
+
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-pagination/dist/tui-pagination.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/node_modules/tui-grid/dist/tui-grid.css}">
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 </th:block>
 
 <th:block layout:fragment="script">
-  <script type="text/javascript" th:src="@{/node_modules/tui-pagination/dist/tui-pagination.js}"></script>
-  <script type="text/javascript" th:src="@{/node_modules/tui-grid/dist/tui-grid.js}"></script>
+<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
   <script type="text/javascript" th:src="@{/js/quiz.js}"></script>
 </th:block>
+
+
 
 
 <div layout:fragment="content">
