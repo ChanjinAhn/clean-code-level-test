@@ -5,7 +5,7 @@
   <meta charset="UTF-8"/>
 
   <!-- content css -->
-  <link th:href="@{/css/main.css}" rel="stylesheet">
+<!--  <link th:href="@{/asset/scss/style.tailwind.css}" rel="stylesheet">-->
 <!--  <link rel="stylesheet" th:href="@{/node_modules//tailwind.css}">-->
   <th:block layout:fragment="css"></th:block>
 
@@ -15,10 +15,10 @@
 
 <body>
 <!-- header fragment 사용 -->
-<th:block th:replace="fragments/common_header :: common_header"></th:block>
+<th:block th:replace="fragments/common-header :: common_header"></th:block>
 <!-- content fragment 사용 -->
 <th:block layout:fragment="content"></th:block>
 <!-- footer fragment 사용 -->
-<th:block th:replace="fragments/common_footer :: common_footer"></th:block>
+<th:block th:replace="fragments/common-footer :: common_footer"></th:block>
 </body>
 </html>

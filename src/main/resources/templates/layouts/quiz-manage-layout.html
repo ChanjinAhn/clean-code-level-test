@@ -7,17 +7,15 @@
 
 <meta charset="UTF-8"/>
 
-<!--<link rel="stylesheet" th:href="@{/node_modules/tailwindcss/tailwind.css}">-->
 <script src="https://cdn.tailwindcss.com"></script>
 <th:block layout:fragment="css"></th:block>
 
-<script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.slim.js}"></script>
-<!--<script type="text/javascript" src ="/js/quiz.js"></script>-->
+
 <th:block layout:fragment="script"></th:block>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<th:block th:replace="fragments/quiz-manage-header :: quiz_manage_header"></th:block>
 
-<th:block th:replace="fragments/quiz_manage_header :: quiz_manage_header"></th:block>
-
-<body class="">
+<body class="bg-stone-900">
     <th:block layout:fragment="content"></th:block>
 </body>
 <!-- footer fragment 사용 -->
