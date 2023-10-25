@@ -111,8 +111,8 @@ idea {
 
 // npm 설정
 node{
-	version.set("16.16.0")
-	npmVersion.set("9.8.1")
+	version.set("18.17.1")
+	npmVersion.set("9.6.7")
 	download.set(true)
 	nodeProjectDir.set(file("${project.projectDir}/src/main/resources/static"))
 }
@@ -131,13 +131,11 @@ node{
 //		setWorkingDir("${project.projectDir}/front")
 //	})
 //}
-//val copyTask by tasks.registering(Copy::class) {
-//	dependsOn(buildReactTask)
-//	from(file("${project.projectDir}/front/build"))
-//	into(file("${project.buildDir}/resources/main/static"))
-//}
+val copyTask by tasks.registering(Copy::class) {
+	from(file("${project.projectDir}/front/build"))
+	into(file("${project.buildDir}/resources/main/static"))
+}
 
-
-//tasks.bootJar{
-//	dependsOn(copyTask)
-//}
+tasks.bootJar{
+	dependsOn(copyTask)
+}
