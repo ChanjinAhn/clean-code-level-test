@@ -1,7 +1,13 @@
-spring.profiles.group:
-  "test": "common,local,local-db-h2"
----
-# common
+spring:
+  profiles:
+    active:
+      - test
+    group:
+      test:
+        - common
+        - local
+        - local-db-h2
+--- # common
 spring:
   config:
     activate:
@@ -11,10 +17,7 @@ spring:
     suffix: .html
   resource:
     static-locations: classpath:/static
-
-
----
-# Local
+--- # Local
 spring:
   profiles:
     active: local
@@ -22,20 +25,17 @@ spring:
     livereload:
       enabled: true
     restart:
-      enabled: false
-## server
+      enabled: true
   thymeleaf:
     cache: false
     check-template-location: true
-  server:
-    port: 8080
-    undertow:
-      threads:
-        io: 16
-        worker: 400
-
----
-# service server
+server:
+  port: 8080
+  undertow:
+    threads:
+      io: 16
+      worker: 400
+--- # service server
 spring:
   profiles:
     active: server
@@ -46,10 +46,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-
-
----
-# DB - H2
+--- # DB - H2
 spring:
   profiles:
     active: local-db-h2
