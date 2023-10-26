@@ -6,18 +6,24 @@
 >
 
 <meta charset="UTF-8"/>
-
-<script src="https://cdn.tailwindcss.com"></script>
+<link th:href="@{./css/style.main.css}" rel="stylesheet">
+<link th:href="@{./css/style.tailwind.css}" rel="stylesheet">
+<!-- highlight.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+<script>hljs.highlightAll();</script>
 <th:block layout:fragment="css"></th:block>
 
 
 <th:block layout:fragment="script"></th:block>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<th:block th:replace="fragments/quiz-manage-header :: quiz_manage_header"></th:block>
+<script th:src="@{./node_modules/jquery/dist/jquery.js}"></script>
+<!--<th:block th:replace="fragments/quiz-manage-header :: quiz_manage_header"></th:block>-->
 
-<body class="bg-stone-900">
+<body class="bg-stone-800">
     <th:block layout:fragment="content"></th:block>
 </body>
 <!-- footer fragment 사용 -->
 <!--<th:block th:replace="fragments/common_footer :: common_footer"></th:block>-->
 </html>
+
