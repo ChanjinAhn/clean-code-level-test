@@ -21,6 +21,12 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
+	maven {
+		url = uri("https://repo.spring.io/release")
+	}
+	maven {
+		url = uri("https://repository.jboss.org/maven2")
+	}
 }
 configurations {
 	all {
@@ -37,7 +43,8 @@ allOpen {
 }
 dependencies {
 	// kotlin
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	runtimeOnly("org.jetbrains.kotlin:kotlin-reflect")
+//	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	// common
