@@ -266,3 +266,6 @@ application-oauth.yml
 ### npm
 src/main/resources/static/node_modules/*
 
+# typescript compiled js file
+src/main/resources/static/js/dist
+
