@@ -7,13 +7,13 @@
 
 
 <th:block layout:fragment="css">
-<link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
-<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<link th:href="@{./node_modules/tui-pagination/dist/tui-pagination.css}" rel="stylesheet">
+<link th:href="@{./node_modules/tui-grid/dist/tui-grid.css}" rel="stylesheet">
 </th:block>
 
 <th:block layout:fragment="script">
-<script src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script th:src="@{./node_modules/tui-pagination/dist/tui-pagination.js}"></script>
+<script th:src="@{./node_modules/tui-grid/dist/tui-grid.js}"></script>
 </th:block>
 
 
