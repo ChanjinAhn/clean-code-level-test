@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "highlight.js": "^11.9.0",
-    "jquery": "^3.7.0",
-    "tui-grid": "^4.21.20"
+    "tui-grid": "^4.18.1"
   }
 }
