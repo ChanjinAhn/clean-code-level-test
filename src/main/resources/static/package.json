@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.7"
   },
   "dependencies": {
     "highlight.js": "^11.9.0",
