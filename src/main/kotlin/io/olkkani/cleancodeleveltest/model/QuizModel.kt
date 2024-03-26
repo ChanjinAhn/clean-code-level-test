@@ -1,15 +1,23 @@
-
-import io.olkkani.cleancodeleveltest.domain.CorrectOption
+package io.olkkani.cleancodeleveltest.model
 import io.olkkani.cleancodeleveltest.domain.Quiz
 import org.springframework.data.domain.Page
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 data class QuizRequest(
+    @NotNull
     val quizType: String,
+    @NotEmpty
     val question: String,
+    @NotEmpty
     val optionA: String,
+    @NotEmpty
     val optionB: String,
+    @NotNull
     val correctOption: String,
+    @NotEmpty
     val answer: String,
+    @NotEmpty
     val description: String,
 )
 
