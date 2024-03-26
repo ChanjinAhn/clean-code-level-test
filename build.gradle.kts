@@ -56,6 +56,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	// was
 	implementation("org.springframework.boot:spring-boot-starter-undertow")
 	// database, jdbc
