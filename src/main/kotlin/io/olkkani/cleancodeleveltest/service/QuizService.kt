@@ -1,6 +1,6 @@
 package io.olkkani.cleancodeleveltest.service
 
-import QuizRequest
+import io.olkkani.cleancodeleveltest.model.QuizRequest
 import io.olkkani.cleancodeleveltest.config.exception.NotFoundException
 import io.olkkani.cleancodeleveltest.domain.*
 import org.springframework.data.domain.Pageable

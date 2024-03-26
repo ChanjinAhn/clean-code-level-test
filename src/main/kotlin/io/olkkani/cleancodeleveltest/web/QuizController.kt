@@ -1,6 +1,6 @@
 package io.olkkani.cleancodeleveltest.web
 
-import QuizRequest
+import io.olkkani.cleancodeleveltest.model.QuizRequest
 import io.olkkani.cleancodeleveltest.service.QuizService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
-import toResponse
+import io.olkkani.cleancodeleveltest.model.toResponse
 
 @Controller
 class QuizController (

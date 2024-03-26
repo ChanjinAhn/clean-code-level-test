@@ -1,14 +1,16 @@
 package io.olkkani.cleancodeleveltest.web
 
-import QuizRequest
-import QuizResponse
+import io.olkkani.cleancodeleveltest.model.QuizRequest
+import io.olkkani.cleancodeleveltest.model.QuizResponse
 import io.olkkani.cleancodeleveltest.service.QuizService
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import toPaginationResponse
-import toResponse
+import io.olkkani.cleancodeleveltest.model.toPaginationResponse
+import io.olkkani.cleancodeleveltest.model.toResponse
+import org.springframework.validation.annotation.Validated
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/quizzes/")
@@ -19,7 +21,7 @@ class QuizRestController(
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(
-        @RequestBody request: QuizRequest
+        @RequestBody @Valid request: QuizRequest
     ): ResponseEntity.HeadersBuilder<*> {
         quizService.create(request)
         return ResponseEntity.noContent()
@@ -47,7 +49,7 @@ class QuizRestController(
     @ResponseStatus(HttpStatus.OK)
     fun edit (
         @PathVariable id: Long,
-        @RequestBody request: QuizRequest
+        @RequestBody @Valid request: QuizRequest
     ): ResponseEntity.BodyBuilder {
         quizService.edit(id, request)
         return ResponseEntity.accepted()
