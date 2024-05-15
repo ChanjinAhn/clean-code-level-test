@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Get Quiz
-GET http://localhost:8080/quizzes/1
+GET http://localhost:8080/quizzes/999
 
 ### Edit Quiz
 PUT http://localhost:8080/quizzes/1

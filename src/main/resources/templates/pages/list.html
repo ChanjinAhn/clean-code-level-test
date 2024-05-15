@@ -27,15 +27,9 @@
 </div>
 </html>
 
-<script th:inline="javascript">
-
-  const quizAPI = {
-    api: {
-      readData: {url: '/quizzes/', method: 'GET'}
-    },
-  }
-
-  let grid = new tui.Grid({
+<script type="module" th:src="@{/src/js/dist/list.js}"></script>
+<script>
+  const grid = tui.Grid({
     el: document.getElementById('quizzesList'),
     data: quizAPI,
     contentType: 'application/json',
@@ -62,25 +56,5 @@
       }
     ],
     showDummyRows: true
-  });
-
-  const registerButton = document.getElementById("register_button")
-  function getColumnId(el){
-    return grid.getFormattedValue(el.rowKey, 'id')
-  }
-
-  registerButton.addEventListener('click', function () {
-    moveRegisterPage()
   })
-
-
-
-  grid.on('click', el => {
-    const id = getColumnId(el)
-    if(!id) return null
-
-    moveEditPage(id)
-  })
-
-
 </script>

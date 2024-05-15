@@ -4,13 +4,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/quiz-manage-layout}" lang="kr">
 
-<th:block layout:fragment="css"></th:block>
+<th:block layout:fragment="css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</th:block>
 
 <th:block layout:fragment="script">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
 </th:block>
 <main layout:fragment="content" class="m-auto min-w-min w-4/6 max-w-md pt-14">
-    <section id="">
+
+    <section id="welcome">
         <h2 class="text-center text-gray-200 text-2xl font-medium"><span class="font-bold">클린 코드</span> 레벨 테스트</h2>
         <h3 class="text-center text-gray-200 text-xl font-medium">Java 클린코드 문제 풀기</h3>
         <h3 class="text-center text-gray-200 text-xl font-medium">과연 내 점수는?</h3>
@@ -26,57 +31,70 @@
             시작하기 >
         </button>
     </section>
-    <section>
+    <section id="level-test" style="display: none">
         <article>
             <div class="flex justify-end mb-1">
-                <span class="text-sm font-medium text-blue-700 dark:text-white"><a id="score">0</a>/10</span>
+                <span class="text-sm font-medium text-blue-700 dark:text-white"><a id="quiz-count">0</a>/10</span>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700">
-                <div class="bg-gray-600 h-2.5 rounded-full dark:bg-gray-300" id="score-progress" style="width: 0"></div>
+                <div class="bg-gray-600 h-2.5 rounded-full dark:bg-gray-300" id="quiz-progress" style="width: 0"></div>
             </div>
         </article>
-        <article id="level-test">
+        <article id="quiz">
             <h2 id="question" class="text-center text-gray-200 text-2xl font-medium"></h2>
-            <div class="grid grid-rows-2 grid-flow-col gap-4 container">
-                <div th:name="option" id="option-a" class="row-span-1">
-                    <pre class="prettyprint"><code class="language-java"></code></pre>
-                </div>
-                <div th:name="option" id="option-b" class="row-span-1">
-                    <pre class="prettyprint"><code class="language-java"></code></pre>
-                </div>
+
+
+            <div class="radio-group">
+                <input type="radio" id="option1" name="option" value="A" checked>
+                <label for="option1">
+                    <pre class=""><code class="language-java" id="option-a-code"></code></pre>
+                </label>
+                <input type="radio" id="option2" name="option" value="B">
+                <label for="option2">
+                    <pre class=""><code class="language-java" id="option-b-code"></code></pre>
+                </label>
             </div>
-            <button type="submit"
+
+            <!--            <div class="grid grid-rows-2 grid-flow-col gap-4 container">-->
+            <!--                <div th:name="option" id="option-a" class="row-span-1">-->
+            <!--                    <pre class=""><code class="language-java" id="option-a-code1"></code></pre>-->
+            <!--                </div>-->
+            <!--                <div th:name="option" id="option-b" class="row-span-1">-->
+
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <button type="button"
                     class="w-full mt-6 bg-stone-200 rounded-lg px-4 py-2 text-lg tracking-wide font-semibold font-sans"
-                    id="btn-select">
+                    id="btn-decide">
                 선택 >
             </button>
         </article>
-        <article id="description-answer">
+        <article id="description-answer" style="display: none">
             <h2 id="answer" class="text-center text-gray-200 text-2xl font-medium"></h2>
             <pre id="correct-option-code" class="prettyprint"><code class="language-java"></code></pre>
             <h3 id="description" class="text-center text-gray-200 text-2xl font-medium"></h3>
-            <button type="submit"
+            <button type="button"
                     class="w-full mt-6 bg-stone-200 rounded-lg px-4 py-2 text-lg tracking-wide font-semibold font-sans"
                     id="btn-next">
                 다음 >
             </button>
         </article>
     </section>
-    <div id="result">
+    <div id="result" style="display: none">
         <h2 class="text-center text-gray-200 text-2xl font-medium">당신의 <span>클린 코드</span> 레벨은</h2>
         <h2 class="text-center text-gray-200 text-2xl font-medium">LV.<a id="result-score"></a></h2>
+        <h3 id="result-comment"></h3>
         <picture>
             <source srcset="/images/closing-ghost.png">
             <img src="/images/closing-ghost.png" alt="">
         </picture>
-        <h3 id="comment"></h3>
         <button
                 class="w-full mt-6 bg-stone-200 rounded-lg px-4 py-2 text-lg tracking-wide font-semibold font-sans"
-                id="btn-back">
+                id="btn-retry">
             다시하기 >
         </button>
     </div>
 </main>
 </html>
-
-<script type="module" th:src="@{/js/dist/level-test.js}"></script>
+<script type="module" th:src="@{/js/level-test.js}"></script>

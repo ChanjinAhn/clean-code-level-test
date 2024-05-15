@@ -42,7 +42,7 @@ spring:
   devtools:
     livereload:
       enable: false
-## DB, jpa config
+  ## DB, jpa config
   jpa:
     hibernate:
       ddl-auto: validate
