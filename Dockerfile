@@ -33,7 +33,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
 
 WORKDIR /app
 
-COPY . /app
+COPY src /app
 
 RUN ./gradlew build
 
