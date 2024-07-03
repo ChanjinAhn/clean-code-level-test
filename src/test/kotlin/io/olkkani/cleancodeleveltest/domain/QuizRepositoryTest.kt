@@ -47,7 +47,7 @@ class QuizRepositoryTest(
     @Test
     fun getQuizzesTest() {
         //Given
-        for (i in 1 .. 20) {
+        for (i in 1..20) {
             quizRepository.save(
                 Quiz(
                     quizType = QuizTypeOption.OPTION_A,
@@ -60,26 +60,26 @@ class QuizRepositoryTest(
                 )
             )
         }
-            // When
-            val quizzesPageOne: Slice<Quiz> = quizRepository.findQuizzesBy(PageRequest.of(0,3))
-            val quizzesPageTwo = quizRepository.findQuizzesBy(PageRequest.of(1,3))
+        // When
+        val quizzesPageOne: Slice<Quiz> = quizRepository.findQuizzesBy(PageRequest.of(0, 3))
+        val quizzesPageTwo = quizRepository.findQuizzesBy(PageRequest.of(1, 3))
 
-        for (i in 1 ..5 ){
+        for (i in 1..5) {
             logger.error { quizzesPageOne.content[0].id }
         }
-            // Then
-            assertThat(quizzesPageOne.content[0].id).isEqualTo(1)
-            assertThat(quizzesPageOne.size).isEqualTo(3)
+        // Then
+        assertThat(quizzesPageOne.content[0].id).isEqualTo(1)
+        assertThat(quizzesPageOne.size).isEqualTo(3)
 
-            assertThat(quizzesPageTwo.content[0].id).isEqualTo(4)
-            assertThat(quizzesPageTwo.size).isEqualTo(3)
+        assertThat(quizzesPageTwo.content[0].id).isEqualTo(4)
+        assertThat(quizzesPageTwo.size).isEqualTo(3)
     }
 
     @DisplayName("Quiz 랜덤 항목 조회 테스트")
     @Test
     fun getRandomQuizTest() {
         // Given
-        for (i in 1 .. 20){
+        for (i in 1..20) {
             quizRepository.save(
                 Quiz(
                     quizType = QuizTypeOption.OPTION_A,
@@ -101,13 +101,11 @@ class QuizRepositoryTest(
         assertThat(savedQuizzes?.size).isEqualTo(10)
 
 
-
-
     }
 
     @Test
     @Transactional
-    fun editQuizTest() {
+    fun updateQuizTest() {
         // given
         val quiz = Quiz(
             quizType = QuizTypeOption.OPTION_A,
@@ -121,13 +119,16 @@ class QuizRepositoryTest(
         val savedQuiz = quizRepository.save(quiz)
 
         //when
-        val editedQuiz = quizRepository.findByIdOrNull(savedQuiz.id)?.apply {
+        val modifiedQuiz = quizRepository.findByIdOrNull(savedQuiz.id)?.apply {
             question = "변경된 질문"
-        }?: throw NotFoundException("질문이 존재하지 않습니다.")
+        }?.let {
+            quizRepository.save(it)
+        } ?: throw NotFoundException("질문이 존재하지 않습니다.")
 
-//         Then
-        assertThat(savedQuiz.id).isEqualTo(editedQuiz.id)
-        assertThat(savedQuiz.question).isNotEqualTo(editedQuiz.question)
+
+        // Then
+        assertThat(savedQuiz.id).isEqualTo(modifiedQuiz.id)
+        assertThat("변경된 질문").isEqualTo(modifiedQuiz.question)
     }
 
 

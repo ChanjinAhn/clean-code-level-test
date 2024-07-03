@@ -46,8 +46,8 @@ class QuizService(
     fun getRandomList(): List<Quiz>? = quizRepositorySupport.getRandomQuiz()
 
     @Transactional
-    fun edit(id: Long, request: QuizRequest) {
-        quizRepository.findByIdOrNull(id)?.apply{
+    fun update(id: Long, request: QuizRequest) {
+        quizRepository.findByIdOrNull(id)?.apply {
             quizType = QuizTypeOption to request.quizType
             question = request.question
             optionA = request.optionA
@@ -55,6 +55,8 @@ class QuizService(
             correctOption = CorrectOption to request.correctOption
             answer = request.answer
             description = request.description
+        }?.also {
+            quizRepository.save(it)
         } ?: throw NotFoundException("질문이 존재하지 않습니다.")
     }
 }

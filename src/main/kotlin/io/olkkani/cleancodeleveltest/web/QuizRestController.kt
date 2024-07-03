@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import io.olkkani.cleancodeleveltest.model.toPaginationResponse
 import io.olkkani.cleancodeleveltest.model.toResponse
-import org.springframework.validation.annotation.Validated
 import javax.validation.Valid
 
 @RestController
@@ -29,29 +28,28 @@ class QuizRestController(
 
     @GetMapping
     fun getAll(
-        @RequestParam(defaultValue = "10") perPage : Int,
-        @RequestParam(defaultValue = "0") page : Int
-    )= ResponseEntity.ok().body(quizService.getAll(PageRequest.of(page-1,perPage)).toPaginationResponse())
+        @RequestParam(defaultValue = "10") perPage: Int,
+        @RequestParam(defaultValue = "0") page: Int
+    ) = ResponseEntity.ok().body(quizService.getAll(PageRequest.of(page - 1, perPage)).toPaginationResponse())
 
 
     @GetMapping("/{id}")
     fun get(
         @PathVariable id: Long
-    ): ResponseEntity<QuizResponse>
-        = ResponseEntity.ok(quizService.get(id).toResponse())
+    ): ResponseEntity<QuizResponse> = ResponseEntity.ok(quizService.get(id).toResponse())
 
     @GetMapping("/random")
-    fun getRandomQuizzes(): ResponseEntity<List<QuizResponse>>
-        = ResponseEntity.ok().body(quizService.getRandomList()?.map { it.toResponse() })
+    fun getRandomQuizzes(): ResponseEntity<List<QuizResponse>> =
+        ResponseEntity.ok().body(quizService.getRandomList()?.map { it.toResponse() })
 
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun edit (
+    fun edit(
         @PathVariable id: Long,
         @RequestBody @Valid request: QuizRequest
     ): ResponseEntity.BodyBuilder {
-        quizService.edit(id, request)
+        quizService.update(id, request)
         return ResponseEntity.accepted()
     }
 
