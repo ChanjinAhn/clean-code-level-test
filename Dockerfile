@@ -33,12 +33,18 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
 
 WORKDIR /app
 
-# Copy build files
-COPY build.gradle.kts settings.gradle.kts /app/
-COPY src /app/src
+
+
+# Copy the gradle wrapper and the gradle directory first
+COPY gradlew /app/gradlew
+COPY gradle /app/gradle
 
 # Ensure the gradlew script has execute permissions
 RUN chmod +x gradlew
+
+# Copy build files
+COPY build.gradle.kts settings.gradle.kts /app/
+COPY src /app/src
 
 RUN ./gradlew build
 
