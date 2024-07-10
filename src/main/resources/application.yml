@@ -1,12 +1,13 @@
 spring:
   profiles:
-    active:
-      - test
     group:
-      test:
+      local:
         - common
         - local
         - local-db-h2
+      prod:
+        - common
+        - enable-caching
 --- # common
 spring:
   config:
@@ -38,7 +39,7 @@ server:
 --- # service server
 spring:
   profiles:
-    active: server
+    active: enable-caching
   devtools:
     livereload:
       enable: false
