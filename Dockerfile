@@ -31,9 +31,8 @@ RUN set -eux \
 ENV LANG C.UTF-8
 ENV JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
 
+# set the soring directory
 WORKDIR /app
-
-
 
 # Copy the gradle wrapper and the gradle directory first
 COPY gradlew /app/gradlew
@@ -50,4 +49,8 @@ RUN ./gradlew build
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "build/libs/cclt.jar"]
+# Copy the JAR file to the container
+COPY build/libs/cclt.jar /app/cclt.jar
+
+# Command to run the application
+CMD ["java", "-jar", "/app/cclt.jar"]
