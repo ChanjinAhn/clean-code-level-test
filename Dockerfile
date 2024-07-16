@@ -50,7 +50,7 @@ RUN ./gradlew build
 EXPOSE 8080
 
 # Copy the JAR file to the container
-COPY build/libs/cclt.jar /app/cclt.jar
+COPY build/libs/clean-code-level-test.jar /app/cclt.jar
 
 # Command to run the application
 CMD ["java", "-jar", "/app/cclt.jar"]
