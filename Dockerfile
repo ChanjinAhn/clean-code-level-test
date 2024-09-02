@@ -83,7 +83,7 @@ RUN ./gradlew build
 EXPOSE 8080
 
 # Copy the JAR file to the container
-COPY build/libs/clean-code-level-test.jar clean-code-lavel-test.jar
+COPY build/libs/clean-code-level-test.jar /app/clean-code-lavel-test.jar
 
 # Command to run the application
-CMD ["java", "-jar", "clean-code-lavel-test.jar"]
+CMD ["java", "-jar", "/app/clean-code-lavel-test.jar"]
