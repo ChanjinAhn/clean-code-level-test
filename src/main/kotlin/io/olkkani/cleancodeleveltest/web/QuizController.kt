@@ -11,40 +11,37 @@ import org.springframework.web.bind.annotation.RequestParam
 import io.olkkani.cleancodeleveltest.model.toResponse
 
 @Controller
-class QuizController (
+class QuizController(
     private val quizService: QuizService
-){
+) {
 
     @GetMapping("/list")
-    fun list (
+    fun list(
     ) = "pages/list"
 
 
     @GetMapping("/register")
-    fun register (
+    fun register(
     ) = "pages/register"
 
     @PostMapping("/register")
-    fun create (
+    fun create(
         @RequestBody quizRequest: QuizRequest
-    ): String{
+    ): String {
         quizService.create(quizRequest)
         return "redirect:/list"
     }
 
     @PostMapping("/editor")
-    fun editor (
-       @RequestParam id: Long,
-       model: Model
+    fun editor(
+        @RequestParam id: Long,
+        model: Model
     ): String {
         val quiz = quizService.get(id).toResponse()
-        model.addAttribute( "quiz", quiz)
+        model.addAttribute("quiz", quiz)
         return "pages/editor"
     }
 
     @GetMapping
-    fun quiz () = "pages/level-test"
-
-    @PostMapping("/result")
-    fun result () = "pages/result"
+    fun quiz() = "pages/level-test"
 }

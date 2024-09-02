@@ -42,6 +42,7 @@ allOpen {
     annotation("javax.persistence.Embeddable")
 }
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     // kotlin
     runtimeOnly("org.jetbrains.kotlin:kotlin-reflect")
 //	implementation("org.jetbrains.kotlin:kotlin-reflect")
