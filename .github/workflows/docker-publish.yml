@@ -24,22 +24,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.OLKK_GITHUB_TOKEN }}
 
+      - name: Restore Gradle cache directory
+        uses: actions/cache@v4
+        with:
+          path: ./
+          key: ${{ runner.os }}-physicaltheraphy-build-cache-${{ steps.short-sha.outputs.sha }}
+          
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Cache Primes
-        id: cache-primes
-        uses: actions/cache@v4
-        with:
-          path: prime-numbers
-          key: ${{ runner.os }}-primes
-
-      - name: Generate Prime Numbers
-        if: steps.cache-primes.outputs.cache-hit != 'true'
-        run: /generate-primes.sh -d prime-numbers
-
-      - name: Use Prime Numbers
-        run: /primes.sh -d prime-numbers
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
