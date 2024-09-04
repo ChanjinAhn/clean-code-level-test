@@ -17,11 +17,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Restore Gradle cache directory
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
-          path: ./
-          key: ${{ runner.os }}-physicaltheraphy-build-cache-${{ steps.short-sha.outputs.sha }}
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-    
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
