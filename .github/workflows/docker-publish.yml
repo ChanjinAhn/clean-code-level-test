@@ -40,6 +40,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          dockerfile: ./Dockerfile
           no-cache: true
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest
