@@ -4,7 +4,7 @@ FROM eclipse-temurin:17-alpine
 WORKDIR /app
 
 # Copy the build files into the container
-COPY ./build/libs/clean-code-level-test-*.jar /app/clean-code-level-test.jar
+COPY ./build/libs/clean-code-level-test.jar /app/clean-code-level-test.jar
 
 # Expose the port your Spring app will run on (default: 8080)
 EXPOSE 8080
