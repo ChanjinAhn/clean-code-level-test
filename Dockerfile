@@ -66,24 +66,14 @@ ENTRYPOINT ["/__cacert_entrypoint.sh"]
 CMD ["jshell"]
 # --- end set base image ---
 
-# set the soring directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the gradle wrapper and resource
-COPY gradlew /gradlew
-COPY gradle/ /app/gradle
-COPY build.gradle.kts /app
-COPY settings.gradle.kts /app
-COPY src /app/src
+# Copy the build files into the container
+COPY ./build/libs/clean-code-level-test-*.jar /app/clean-code-level-test.jar
 
-# Ensure the gradlew script has execute permissions
-RUN chmod +x gradlew
-RUN ./gradlew build
-
+# Expose the port your Spring app will run on (default: 8080)
 EXPOSE 8080
 
-# Copy the JAR file to the container
-COPY build/libs/clean-code-level-test.jar /app/clean-code-level-test.jar
-
 # Command to run the application
-CMD ["java", "-jar", "/app/clean-code-level-test.jar"]
+CMD ["java", "-jar", "clean-code-level-test.jar"]
