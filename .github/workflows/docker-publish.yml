@@ -55,15 +55,39 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Log in to the GitHub Container Registry
-        uses: docker/login-action@v3
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY}}
+          script: |
+            # 1. 새 이미지를 레지스트리에서 pull
+            docker pull ghcr.io/${{ github.repository }}:latest
 
-      - name: Pull Docker image from GitHub Packages
-        run: docker pull ghcr.io/${{ github.repository }}:latest
+            # 2. 기존 컨테이너 중지 및 삭제
+            docker stop cclt-green || true  # 기존 컨테이너가 있으면 중지
+            docker rm cclt-green || true    # 기존 컨테이너가 있으면 삭제
 
-      - name: Run Docker container
-        run: docker run -d -p 8080:8080 --name cclt ${{ github.repository }}:latest
+            # 3. 새로운 이미지로 컨테이너 실행
+            docker run -d -p 8082:8080 --name cclt-green ghcr.io/${{ github.repository }}:latest
+
+      - name: Switch to Green
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY}}
+          script: |
+            #             새 버전의 Docker 이미지를 EC2에서 pull
+            docker pull ghcr.io/${{ github.repository }}:latest
+            
+            # Stop and remove the old container
+            docker stop green || true && docker rm green || true
+            
+            # 새 인스턴스(app_v2) 실행
+            docker run -d -p 8082:8080 --name green ghcr.io/${{ github.repository }}:latest
+            
+            # Update Nginx to point to Green environment
+            sudo sed -i 's/blue/green/g' /etc/nginx/sites-available/default
+            sudo service nginx reload
