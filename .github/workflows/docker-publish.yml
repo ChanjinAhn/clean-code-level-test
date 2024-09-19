@@ -66,11 +66,11 @@ jobs:
             docker pull ghcr.io/${{ github.repository }}:latest
 
             # 2. 기존 컨테이너 중지 및 삭제
-            docker stop cclt-green || true  # 기존 컨테이너가 있으면 중지
-            docker rm cclt-green || true    # 기존 컨테이너가 있으면 삭제
+            docker stop green || true  # 기존 컨테이너가 있으면 중지
+            docker rm green || true    # 기존 컨테이너가 있으면 삭제
 
             # 3. 새로운 이미지로 컨테이너 실행
-            docker run -d -p 8082:8080 --name cclt-green ghcr.io/${{ github.repository }}:latest
+            docker run -d -p 8082:8080 --name green ghcr.io/${{ github.repository }}:latest
 
       - name: Switch to Green
         uses: appleboy/ssh-action@v1.0.3
